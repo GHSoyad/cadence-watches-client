@@ -1,17 +1,38 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import logo from '../../Assets/images/logo.png';
+import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 
 const Navbar = () => {
 
-    const menuLinks = [
-        { name: 'Home', path: '/' },
-        { name: 'Blogs', path: '/blogs' },
-        { name: 'Login', path: '/login' },
+    const { userInfo, setUserInfo, signOutUser } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-    ]
+    const handleSignOut = () => {
+        signOutUser()
+            .then(() => {
+                setUserInfo(null);
+                toast.success("Logged out successfully.");
+                navigate('/');
+            })
+            .catch(error => toast.error(error.message))
+    }
+
+    const menuLinks = <>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/blogs'>Blogs</NavLink></li>
+
+        {
+            userInfo && userInfo.uid ?
+                <li onClick={handleSignOut}><Link>Logout</Link></li>
+                :
+                <li><NavLink to='/login'>Login</NavLink></li>
+        }
+    </>
+
     return (
-        <div className="navbar bg-base-100 justify-between container mx-auto max-w-screen-lg">
+        <div className="navbar bg-base-100 justify-between container mx-auto max-w-screen-lg font-semibold">
             <Link className="max-w-[200px]"><img src={logo} alt="" className='w-full rounded' /></Link>
             <div>
                 <div className="dropdown dropdown-end">
@@ -19,17 +40,13 @@ const Navbar = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                        {
-                            menuLinks.map((menuLink, i) => <li key={i}><Link to={menuLink.path}>{menuLink.name}</Link></li>)
-                        }
+                        {menuLinks}
                     </ul>
                 </div>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
-                    {
-                        menuLinks.map((menuLink, i) => <li key={i}><Link to={menuLink.path}>{menuLink.name}</Link></li>)
-                    }
+                    {menuLinks}
                 </ul>
             </div>
         </div>
