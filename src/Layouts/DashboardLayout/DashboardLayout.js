@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import Navbar from '../../Components/Navbar/Navbar';
 
 const DashboardLayout = () => {
@@ -8,8 +8,8 @@ const DashboardLayout = () => {
             <Navbar></Navbar>
             <div className="drawer drawer-mobile bg-neutral-focus mt-10">
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col items-center justify-center">
-                    {/* <!-- Page content here --> */}
+                <div className="drawer-content p-4">
+                    <Outlet></Outlet>
                 </div>
 
                 <div className="drawer-side">
