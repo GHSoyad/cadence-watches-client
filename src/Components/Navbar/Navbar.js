@@ -6,7 +6,9 @@ const Navbar = () => {
 
     const menuLinks = [
         { name: 'Home', path: '/' },
-        { name: 'Blogs', path: '/blogs' }
+        { name: 'Blogs', path: '/blogs' },
+        { name: 'Login', path: '/login' },
+
     ]
     return (
         <div className="navbar bg-base-100 justify-between container mx-auto max-w-screen-lg">
