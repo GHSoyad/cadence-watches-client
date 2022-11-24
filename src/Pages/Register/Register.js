@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 
 const Register = () => {
-    const { createUser, setUserInfo } = useContext(AuthContext);
+    const { createUser, setUserInfo, updateUserProfile } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const handleForm = (data) => {
@@ -17,10 +17,16 @@ const Register = () => {
         createUser(email, password)
             .then(userCredential => {
                 setUserInfo(userCredential.user);
-                saveUserInfo(name, email, role);
+                const profile = { displayName: name };
+                updateUserProfile(profile)
+                    .then(() => {
+                        saveUserInfo(name, email, role);
+                    })
+                    .catch(error => console.log(error.message))
             })
             .catch(error => toast.error(error.message))
     }
+
 
     const saveUserInfo = (name, email, role) => {
         const user = {

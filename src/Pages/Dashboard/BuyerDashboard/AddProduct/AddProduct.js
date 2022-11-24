@@ -18,7 +18,50 @@ const AddProduct = () => {
     const handleForm = (data) => {
         const sellerName = userInfo?.displayName;
         const sellerEmail = userInfo.email;
-        console.log(data, sellerName, sellerEmail)
+
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append('image', image);
+
+        fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_Imgbb_API_KEY}`, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgData => {
+                if (imgData.success) {
+                    const imgURL = imgData.data.url;
+
+                    const product = {
+                        sellerName,
+                        sellerEmail,
+                        name: data.name,
+                        description: data.description,
+                        image: imgURL,
+                        phone: data.phone,
+                        location: data.location,
+                        originalPrice: data.originalPrice,
+                        resalePrice: data.resalePrice,
+                        yearPurchased: data.yearPurchased,
+                        yearsUsed: data.yearsUsed,
+                        category: data.category,
+                        condition: data.condition,
+                    }
+                    console.log(product)
+
+                    fetch('http://localhost:5000/products', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(product)
+                    })
+                        .then(res => res.json())
+                        .then(data => console.log(data))
+                        .catch(error => console.log(error))
+                }
+            })
+            .catch(error => console.log(error))
     }
 
     return (
@@ -26,13 +69,15 @@ const AddProduct = () => {
             <h2 className='text-center text-2xl font-medium'>Add a Product</h2>
             <form onSubmit={handleSubmit(handleForm)} className='max-w-md pt-6 rounded-lg flex flex-col gap-4 flex-1 mx-auto'>
                 <input {...register('name')} type="text" placeholder="Product Name" className="input input-bordered w-full" required />
+                <textarea {...register('description')} className="textarea textarea-bordered w-full" placeholder="Description" required></textarea>
+                <input {...register('phone')} type="text" placeholder="Phone Number" className="input input-bordered w-full" required />
                 <input {...register('location')} type="text" placeholder="Location" className="input input-bordered w-full" required />
                 <div className='flex gap-4'>
                     <input {...register('originalPrice')} type="number" placeholder="Original Price" className="input input-bordered w-full" required />
                     <input {...register('resalePrice')} type="number" placeholder="Resale Price" className="input input-bordered w-full" required />
                 </div>
                 <div className='flex gap-4'>
-                    <input {...register('yearsPurchased')} type="number" placeholder="Year of Purchase" className="input input-bordered w-full" required />
+                    <input {...register('yearPurchased')} type="number" placeholder="Year of Purchase" className="input input-bordered w-full" required />
                     <input {...register('yearsUsed')} type="number" placeholder="Years of Use" className="input input-bordered w-full" required />
                 </div>
                 <div className='flex flex-col sm:flex-row gap-4 justify-between'>
