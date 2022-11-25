@@ -36,7 +36,7 @@ const Navbar = () => {
     </>
 
     return (
-        <div className="navbar bg-base-100 justify-between container mx-auto max-w-screen-lg font-semibold">
+        <div className="navbar bg-base-100 justify-between container mx-auto max-w-screen-xl font-semibold">
             <Link to='/' className="max-w-[200px] mr-4"><img src={logo} alt="" className='w-full rounded' /></Link>
             <div className='flex gap-1'>
                 <div className="dropdown dropdown-end">

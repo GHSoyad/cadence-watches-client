@@ -17,9 +17,17 @@ const AddProduct = () => {
                 .then(res => res.json())
     })
 
+    const { isLoading: userLoading, data: user } = useQuery({
+        queryKey: ['user', userInfo?.email],
+        queryFn: () =>
+            fetch(`http://localhost:5000/user?email=${userInfo.email}`)
+                .then(res => res.json())
+    })
+
     const handleForm = (data) => {
-        const sellerName = userInfo?.displayName;
-        const sellerEmail = userInfo.email;
+        const sellerName = user.name;
+        const sellerEmail = user.email;
+        const sellerStatus = user.status;
         const date = format(new Date(), 'PPPpp');
         const image = data.image[0];
         const formData = new FormData();
@@ -37,6 +45,7 @@ const AddProduct = () => {
                     const product = {
                         sellerName,
                         sellerEmail,
+                        sellerStatus,
                         name: data.name,
                         description: data.description,
                         image: imgURL,
@@ -109,7 +118,7 @@ const AddProduct = () => {
                     </select>
                 </div>
                 <input {...register('image')} type="file" className="file-input file-input-bordered w-full" required />
-                <button className='btn btn-neutral-content hover:glass border-0 mt-4'>Add Product</button>
+                <button className='btn btn-neutral-content hover:glass border-0 mt-4' disabled={userLoading}>Add Product</button>
             </form>
         </div>
     );

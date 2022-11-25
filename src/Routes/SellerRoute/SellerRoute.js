@@ -2,20 +2,23 @@ import React, { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import Loader from '../../Components/Loader/Loader';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
+import useRole from '../../Hooks/useRole';
 
 const SellerRoute = ({ children }) => {
 
-    const { userInfo, userLoading } = useContext(AuthContext);
+    const { userInfo, userLoading, signOutUser } = useContext(AuthContext);
     const location = useLocation();
+    const [role, roleLoading] = useRole(userInfo?.email)
 
-    if (userLoading) {
+    if (userLoading || roleLoading) {
         return <Loader>Logging in...</Loader>
     }
 
-    if (userInfo && userInfo?.email && userInfo?.role === 'seller') {
+    if (userInfo && userInfo?.email && role === 'seller') {
         return children;
     }
 
+    signOutUser()
     return <Navigate to='/login' state={{ from: location }} replace></Navigate>
 };
 

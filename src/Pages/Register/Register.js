@@ -28,10 +28,10 @@ const Register = () => {
             .then(userCredential => {
                 const user = userCredential.user;
                 const currentUser = { ...user, role };
-                setUserInfo(currentUser);
                 const profile = { displayName: name };
                 updateUserProfile(profile)
                     .then(() => {
+                        setUserInfo(currentUser);
                         saveUserInfo(name, email, role);
                     })
                     .catch(error => console.log(error.message))
@@ -66,7 +66,7 @@ const Register = () => {
     }
 
     return (
-        <div className='container mx-auto max-w-screen-lg px-2 md:px-4 xl:px-0 flex justify-center mt-20'>
+        <div className='container mx-auto max-w-screen-xl px-2 md:px-4 xl:px-0 flex justify-center mt-20'>
             <form onSubmit={handleSubmit(handleForm)} className='max-w-md p-6 border border-neutral-content rounded-lg flex-1 flex flex-col gap-4'>
                 <h1 className='text-2xl font-medium text-center'>Register</h1>
                 <div className="form-control w-full">

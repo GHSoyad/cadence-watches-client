@@ -30,7 +30,7 @@ const Login = () => {
             .then(userCredential => {
                 const user = userCredential.user;
 
-                fetch(`http://localhost:5000/role?email=${email}`)
+                fetch(`http://localhost:5000/user?email=${email}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data.role) {
@@ -47,7 +47,7 @@ const Login = () => {
     }
 
     return (
-        <div className='container mx-auto max-w-screen-lg px-2 md:px-4 xl:px-0 flex justify-center mt-20'>
+        <div className='container mx-auto max-w-screen-xl px-2 md:px-4 xl:px-0 flex justify-center mt-20'>
             <form onSubmit={handleSubmit(handleForm)} className='max-w-md p-6 border border-neutral-content rounded-lg flex-1 flex flex-col gap-4'>
                 <h1 className='text-2xl font-medium text-center'>Login</h1>
                 <div className="form-control w-full">

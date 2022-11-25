@@ -3,7 +3,7 @@ import CategorySection from '../CategorySection/CategorySection';
 
 const Home = () => {
     return (
-        <div className='container mx-auto max-w-screen-lg px-2 md:px-4 xl:px-0'>
+        <div className='container mx-auto max-w-screen-xl px-2 md:px-4 xl:px-0'>
             <CategorySection></CategorySection>
         </div>
     );

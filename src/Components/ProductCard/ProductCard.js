@@ -1,9 +1,10 @@
 import React from 'react';
 import { FaMapMarkerAlt } from 'react-icons/fa';
+import { RiCheckboxCircleLine } from 'react-icons/ri';
 
 const ProductCard = ({ product, setBookProduct }) => {
 
-    const { image, name, location, resalePrice, originalPrice, yearsUsed, datePosted, sellerName } = product;
+    const { image, name, location, resalePrice, originalPrice, yearsUsed, datePosted, sellerName, sellerStatus } = product;
 
     return (
         <div className="card card-compact shadow-xl transition-opacity bg-base-200">
@@ -11,7 +12,12 @@ const ProductCard = ({ product, setBookProduct }) => {
             <div className="card-body font-medium">
                 <div className='pb-2'>
                     <h2 className='text-xl font-medium'>{name}</h2>
-                    <p className='text-xs'>{sellerName}</p>
+                    <div className='flex'>
+                        <span className='text-xs'>{sellerName}</span>
+                        {
+                            sellerStatus === 'verified' && <RiCheckboxCircleLine className='ml-1 text-blue-500'></RiCheckboxCircleLine>
+                        }
+                    </div>
                 </div>
                 <div className='flex justify-between text-base gap-1 flex-wrap'>
                     <p className=''>Resale: $ <span className='text-lg'>{resalePrice}</span></p>
