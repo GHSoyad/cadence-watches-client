@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
+import BookingModal from '../../Components/BookingModal/BookingModal';
 import ProductCard from '../../Components/ProductCard/ProductCard';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 
@@ -9,9 +10,10 @@ const CategoryProducts = () => {
 
     const { signOutUser } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [bookProduct, setBookProduct] = useState(null);
 
     const categoryId = useLoaderData();
-    const { isLoading, data: products } = useQuery({
+    const { isLoading, data: products, refetch } = useQuery({
         queryKey: ['products', categoryId],
         queryFn: () =>
             axios.get(`http://localhost:5000/category/${categoryId}`, {
@@ -39,9 +41,13 @@ const CategoryProducts = () => {
                     :
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
                         {
-                            products.map(product => <ProductCard key={product._id} product={product}></ProductCard>)
+                            products.map(product => <ProductCard key={product._id} product={product} setBookProduct={setBookProduct}></ProductCard>)
                         }
                     </div>
+            }
+            {
+                bookProduct &&
+                <BookingModal bookProduct={bookProduct} refetch={refetch} setBookProduct={setBookProduct}></BookingModal>
             }
         </div>
     );

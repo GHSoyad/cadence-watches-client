@@ -1,9 +1,9 @@
 import React from 'react';
-import { FaMapMarkerAlt } from 'react-icons/fa'
+import { FaMapMarkerAlt } from 'react-icons/fa';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, setBookProduct }) => {
 
-    const { image, name, location, resalePrice, originalPrice, yearsUsed, datePosted, sellerName, category, description } = product;
+    const { image, name, location, resalePrice, originalPrice, yearsUsed, datePosted, sellerName } = product;
 
     return (
         <div className="card card-compact shadow-xl transition-opacity bg-base-200">
@@ -24,7 +24,9 @@ const ProductCard = ({ product }) => {
                         <p className='text-base'>{location}</p>
                     </div>
                 </div>
-                <button className='btn bg-base-300 hover:glass my-3'>Book Now</button>
+
+                {/* The button to open modal */}
+                <label onClick={() => setBookProduct(product)} htmlFor="booking-modal" className="btn bg-base-300 hover:glass my-3">Book Now</label>
                 <p className='text-xs flex items-end'>Posted: {datePosted}</p>
             </div>
         </div>
