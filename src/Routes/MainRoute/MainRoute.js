@@ -8,6 +8,7 @@ import Dashboard from "../../Pages/Dashboard/SharedDashboard/Dashboard/Dashboard
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -32,13 +33,13 @@ const router = createBrowserRouter([
                 loader: ({ params }) => {
                     return params.id;
                 },
-                element: <CategoryProducts></CategoryProducts>
+                element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>
             }
         ]
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
