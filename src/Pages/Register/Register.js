@@ -1,22 +1,34 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
+import useToken from '../../Hooks/useToken';
 
 const Register = () => {
-    const { createUser, setUserInfo, updateUserProfile } = useContext(AuthContext);
+    const { createUser, setUserInfo, updateUserProfile, setUserLoading } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [loginEmail, setLoginEmail] = useState('');
+    const [token] = useToken(loginEmail);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (token) {
+            navigate('/')
+        }
+    }, [token, navigate])
 
     const handleForm = (data) => {
         const name = data.name;
-        const email = data.email;
+        const email = data.email.toLowerCase();
         const password = data.password;
         const role = data.role;
 
         createUser(email, password)
             .then(userCredential => {
-                setUserInfo(userCredential.user);
+                const user = userCredential.user;
+                const currentUser = { ...user, role };
+                setUserInfo(currentUser);
                 const profile = { displayName: name };
                 updateUserProfile(profile)
                     .then(() => {
@@ -25,6 +37,7 @@ const Register = () => {
                     .catch(error => console.log(error.message))
             })
             .catch(error => toast.error(error.message))
+            .finally(() => setUserLoading(false))
     }
 
 
@@ -45,6 +58,7 @@ const Register = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {
+                    setLoginEmail(email);
                     toast.success('Registered successfully.')
                 }
             })

@@ -3,12 +3,13 @@ import ErrorPage from "../../Components/ErrorPage/ErrorPage";
 import DashboardLayout from "../../Layouts/DashboardLayout/DashboardLayout";
 import MainLayout from "../../Layouts/MainLayout/MainLayout";
 import CategoryProducts from "../../Pages/CategoryProducts/CategoryProducts";
-import AddProduct from "../../Pages/Dashboard/BuyerDashboard/AddProduct/AddProduct";
+import AddProduct from "../../Pages/Dashboard/SellerDashboard/AddProduct/AddProduct";
 import Dashboard from "../../Pages/Dashboard/SharedDashboard/Dashboard/Dashboard";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 const router = createBrowserRouter([
     {
@@ -48,7 +49,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/add-product',
-                element: <AddProduct></AddProduct>
+                element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
             }
         ]
     }

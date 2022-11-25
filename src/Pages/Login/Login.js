@@ -7,7 +7,7 @@ import useToken from '../../Hooks/useToken';
 
 const Login = () => {
 
-    const { signInWithEmail, setUserInfo } = useContext(AuthContext);
+    const { signInWithEmail, setUserInfo, setUserLoading } = useContext(AuthContext);
     const { register, handleSubmit } = useForm();
     const location = useLocation();
     const navigate = useNavigate();
@@ -29,10 +29,21 @@ const Login = () => {
         signInWithEmail(email, password)
             .then(userCredential => {
                 const user = userCredential.user;
-                setUserInfo(user);
-                setLoginEmail(user.email);
+
+                fetch(`http://localhost:5000/role?email=${email}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.role) {
+                            const role = data.role;
+                            const currentUser = { ...user, role };
+                            setUserInfo(currentUser);
+                            setLoginEmail(user.email);
+                        }
+                    })
+                    .catch(error => console.log(error))
             })
             .catch(error => toast.error(error.message))
+            .finally(() => setUserLoading(false))
     }
 
     return (

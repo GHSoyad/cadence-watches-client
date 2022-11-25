@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import Navbar from '../../Components/Navbar/Navbar';
 import { RiCloseFill, RiDashboardFill } from "react-icons/ri";
+import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 
 const DashboardLayout = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { userInfo } = useContext(AuthContext);
 
     return (
         <div className='container mx-auto max-w-screen-lg'>
@@ -29,7 +31,12 @@ const DashboardLayout = () => {
                     <ul className="menu w-80 bg-base-100 text-base-content">
                         {/* <!-- Sidebar content here --> */}
                         <li><NavLink to='/dashboard' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined} end>Sidebar Item 1</NavLink></li>
-                        <li><NavLink to='/dashboard/add-product' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined}>Sidebar Item 2</NavLink></li>
+                        {
+                            (userInfo?.role === 'seller') &&
+                            <>
+                                <li><NavLink to='/dashboard/add-product' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined}>Add Product</NavLink></li>
+                            </>
+                        }
                     </ul>
                 </div>
             </div>
