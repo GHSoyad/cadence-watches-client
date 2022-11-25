@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../../Contexts/AuthProvider/AuthProvider';
+import { format } from 'date-fns';
+import toast from 'react-hot-toast';
 
 const AddProduct = () => {
 
@@ -18,7 +20,7 @@ const AddProduct = () => {
     const handleForm = (data) => {
         const sellerName = userInfo?.displayName;
         const sellerEmail = userInfo.email;
-
+        const date = format(new Date(), 'PPPpp');
         const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image);
@@ -46,8 +48,9 @@ const AddProduct = () => {
                         yearsUsed: data.yearsUsed,
                         category: data.category,
                         condition: data.condition,
+                        datePosted: date,
+                        status: 'available'
                     }
-                    console.log(product)
 
                     fetch('http://localhost:5000/products', {
                         method: 'POST',
@@ -57,7 +60,11 @@ const AddProduct = () => {
                         body: JSON.stringify(product)
                     })
                         .then(res => res.json())
-                        .then(data => console.log(data))
+                        .then(data => {
+                            if (data.acknowledged) {
+                                toast.success('Product Added to Sale.')
+                            }
+                        })
                         .catch(error => console.log(error))
                 }
             })
@@ -77,7 +84,7 @@ const AddProduct = () => {
                     <input {...register('resalePrice')} type="number" placeholder="Resale Price" className="input input-bordered w-full" required />
                 </div>
                 <div className='flex gap-4'>
-                    <input {...register('yearPurchased')} type="number" placeholder="Year of Purchase" className="input input-bordered w-full" required />
+                    <input {...register('yearPurchased')} type="month" placeholder="Year of Purchase" className="input input-bordered w-full" required />
                     <input {...register('yearsUsed')} type="number" placeholder="Years of Use" className="input input-bordered w-full" required />
                 </div>
                 <div className='flex flex-col sm:flex-row gap-4 justify-between'>
