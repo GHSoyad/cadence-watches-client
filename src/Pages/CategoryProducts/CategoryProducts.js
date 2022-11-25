@@ -1,18 +1,31 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import ProductCard from '../../Components/ProductCard/ProductCard';
+import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 
 const CategoryProducts = () => {
 
+    const { signOutUser } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const categoryId = useLoaderData();
     const { isLoading, data: products } = useQuery({
         queryKey: ['products', categoryId],
         queryFn: () =>
-            axios.get(`http://localhost:5000/category/${categoryId}`)
+            axios.get(`http://localhost:5000/category/${categoryId}`, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('cadenceSecretToken')}`
+                }
+            })
                 .then(data => data.data)
+                .catch(error => {
+                    if (error.response.status === 401 || 403) {
+                        signOutUser();
+                        navigate('/login');
+                    }
+                })
     })
 
     return (
@@ -26,7 +39,7 @@ const CategoryProducts = () => {
                     :
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
                         {
-                            products.map(product => <ProductCard key={product.id} product={product}></ProductCard>)
+                            products.map(product => <ProductCard key={product._id} product={product}></ProductCard>)
                         }
                     </div>
             }

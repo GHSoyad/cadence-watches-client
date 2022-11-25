@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
     const [userLoading, setUserLoading] = useState(true);
 
     const createUser = (email, password) => {
+        setUserLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
@@ -19,6 +20,7 @@ const AuthProvider = ({ children }) => {
     }
 
     const signOutUser = () => {
+        localStorage.removeItem('cadenceSecretToken');
         return signOut(auth);
     }
 
