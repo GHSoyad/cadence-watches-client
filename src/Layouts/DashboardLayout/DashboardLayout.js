@@ -41,6 +41,7 @@ const DashboardLayout = () => {
                         {
                             (userInfo?.role === 'seller') &&
                             <>
+                                <li><NavLink to='/dashboard/my-products' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined}>My Products</NavLink></li>
                                 <li><NavLink to='/dashboard/add-product' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined}>Add Product</NavLink></li>
                             </>
                         }

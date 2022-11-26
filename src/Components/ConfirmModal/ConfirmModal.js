@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ConfirmModal = ({ modalData, closeModal, confirm, title, message }) => {
+const ConfirmModal = ({ modalData, closeModal, confirm, children }) => {
 
     return (
         <div>
@@ -8,8 +8,7 @@ const ConfirmModal = ({ modalData, closeModal, confirm, title, message }) => {
             <input type="checkbox" id="confirm-modal" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box">
-                    <h3 className="font-bold text-lg">{title}</h3>
-                    <p className="py-4">{message}</p>
+                    {children}
                     <div className="modal-action gap-2">
                         <label onClick={() => confirm(modalData)} htmlFor="confirm-modal" className="btn btn-sm hover:btn-error">Yes</label>
                         <label onClick={() => closeModal(null)} htmlFor="confirm-modal" className="btn btn-sm btn-outline">Cancel</label>
