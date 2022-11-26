@@ -31,6 +31,8 @@ const DashboardLayout = () => {
                     <ul className="menu w-80 bg-base-100 text-base-content">
                         {/* <!-- Sidebar content here --> */}
                         <li><NavLink to='/dashboard' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined} end>Dashboard</NavLink></li>
+                        <li><NavLink to='/dashboard/my-orders' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined}>My Orders</NavLink></li>
+
                         {
                             (userInfo?.role === 'admin') &&
                             <>

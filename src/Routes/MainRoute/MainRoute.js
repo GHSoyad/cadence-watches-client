@@ -6,6 +6,7 @@ import Blogs from "../../Pages/Blogs/Blogs";
 import CategoryProducts from "../../Pages/CategoryProducts/CategoryProducts";
 import AllBuyers from "../../Pages/Dashboard/AdminDashboard/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/AdminDashboard/AllSellers/AllSellers";
+import MyOrders from "../../Pages/Dashboard/BuyerDashboard/MyOrders/MyOrders";
 import AddProduct from "../../Pages/Dashboard/SellerDashboard/AddProduct/AddProduct";
 import MyProducts from "../../Pages/Dashboard/SellerDashboard/MyProducts/MyProducts";
 import Dashboard from "../../Pages/Dashboard/SharedDashboard/Dashboard/Dashboard";
@@ -57,8 +58,16 @@ const router = createBrowserRouter([
                 element: <Dashboard></Dashboard>
             },
             {
+                path: '/dashboard/my-orders',
+                element: <MyOrders></MyOrders>
+            },
+            {
                 path: '/dashboard/add-product',
                 element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
+            },
+            {
+                path: '/dashboard/my-products',
+                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
             },
             {
                 path: '/dashboard/all-sellers',
@@ -67,10 +76,6 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/all-buyers',
                 element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
-            },
-            {
-                path: '/dashboard/my-products',
-                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
             }
         ]
     }

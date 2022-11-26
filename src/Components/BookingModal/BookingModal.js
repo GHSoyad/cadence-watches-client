@@ -6,7 +6,7 @@ import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 
 const BookingModal = ({ bookProduct, refetch, setBookProduct }) => {
 
-    const { _id, name, resalePrice, sellerEmail } = bookProduct;
+    const { _id, name, resalePrice, sellerEmail, image } = bookProduct;
     const { userInfo } = useContext(AuthContext);
     const { register, handleSubmit } = useForm();
 
@@ -18,12 +18,14 @@ const BookingModal = ({ bookProduct, refetch, setBookProduct }) => {
             productId: _id,
             product: name,
             price: resalePrice,
+            image,
             buyerName: userInfo.displayName,
             buyerEmail: userInfo.email,
             buyerPhone: data.phone,
             sellerEmail,
             purchaseDate: date,
-            location: data.location
+            location: data.location,
+            status: 'unpaid'
         }
 
         fetch('http://localhost:5000/orders', {
@@ -39,7 +41,11 @@ const BookingModal = ({ bookProduct, refetch, setBookProduct }) => {
                 if (data.acknowledged) {
                     refetch();
                     setBookProduct(null);
-                    toast.success('Product Booked.')
+                    toast.success('Product Booked.');
+                }
+                if (data.message) {
+                    toast.error(data.message);
+                    setBookProduct(null);
                 }
             })
             .catch(error => toast.error(error.message))
