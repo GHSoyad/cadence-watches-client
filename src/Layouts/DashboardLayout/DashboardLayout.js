@@ -31,8 +31,6 @@ const DashboardLayout = () => {
                     <ul className="menu w-80 bg-base-100 text-base-content">
                         {/* <!-- Sidebar content here --> */}
                         <li><NavLink to='/dashboard' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined} end>Dashboard</NavLink></li>
-                        <li><NavLink to='/dashboard/my-orders' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined}>My Orders</NavLink></li>
-
                         {
                             (userInfo?.role === 'admin') &&
                             <>
@@ -45,6 +43,12 @@ const DashboardLayout = () => {
                             <>
                                 <li><NavLink to='/dashboard/my-products' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined}>My Products</NavLink></li>
                                 <li><NavLink to='/dashboard/add-product' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined}>Add Product</NavLink></li>
+                            </>
+                        }
+                        {
+                            (userInfo?.role === 'buyer') &&
+                            <>
+                                <li><NavLink to='/dashboard/my-orders' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined}>My Orders</NavLink></li>
                             </>
                         }
                     </ul>
