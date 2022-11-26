@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
+import FormLoader from '../../Components/FormLoader/FormLoader';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 import GoogleSignIn from '../../Firebase/GoogleSignIn';
 import useToken from '../../Hooks/useToken';
@@ -12,6 +13,8 @@ const Register = () => {
     const [loginEmail, setLoginEmail] = useState('');
     const [token] = useToken(loginEmail);
     const navigate = useNavigate();
+    const [formLoading, setFormLoading] = useState(false);
+    const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
         if (token) {
@@ -20,6 +23,7 @@ const Register = () => {
     }, [token, navigate])
 
     const handleForm = (data) => {
+        setFormLoading(true);
         const name = data.name;
         const email = data.email.toLowerCase();
         const password = data.password;
@@ -31,6 +35,7 @@ const Register = () => {
                 const user = userCredential.user;
                 const currentUser = { ...user, role, displayName };
                 const profile = { displayName: name };
+                setRedirect(true);
                 updateUserProfile(profile)
                     .then(() => {
                         saveUserInfo(name, email, role);
@@ -39,7 +44,10 @@ const Register = () => {
                     .catch(error => console.log(error.message))
             })
             .catch(error => toast.error(error.message))
-            .finally(() => setUserLoading(false))
+            .finally(() => {
+                setUserLoading(false);
+                setFormLoading(false);
+            })
     }
 
 
@@ -61,15 +69,22 @@ const Register = () => {
             .then(data => {
                 if (data.acknowledged) {
                     setLoginEmail(email);
-                    toast.success('Registered successfully.')
+                    toast.success('Registered successfully.');
                 }
             })
             .catch(error => toast.error(error.message))
+            .finally(() => setRedirect(false))
     }
 
     return (
         <div className='container mx-auto max-w-screen-xl px-2 md:px-4 xl:px-0 flex justify-center mt-20'>
-            <div className='max-w-md p-6 border border-neutral-content rounded-lg flex-1'>
+            <div className='max-w-md p-6 border border-neutral-content rounded-lg flex-1 relative'>
+                {
+                    formLoading && <FormLoader>Registering...</FormLoader>
+                }
+                {
+                    redirect && <FormLoader>Redirecting...</FormLoader>
+                }
                 <form onSubmit={handleSubmit(handleForm)} className='flex flex-col gap-4'>
                     <h1 className='text-2xl font-medium text-center'>Register</h1>
                     <div className="form-control w-full">

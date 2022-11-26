@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider/AuthProvider';
 import useToken from '../Hooks/useToken';
 
-const GoogleSignIn = ({ from }) => {
+const GoogleSignIn = ({ from, setFormLoading }) => {
 
     const { signInWithGoogle, setUserInfo, setUserLoading } = useContext(AuthContext);
     const [loginEmail, setLoginEmail] = useState('');
@@ -19,6 +19,7 @@ const GoogleSignIn = ({ from }) => {
     }, [token, navigate, from])
 
     const handleGoogleSignIn = () => {
+        setFormLoading(true);
         signInWithGoogle()
             .then(result => {
                 const user = result.user;
@@ -28,7 +29,10 @@ const GoogleSignIn = ({ from }) => {
                 saveUserInfo(user.displayName, user.email);
             })
             .catch(error => toast.error(error.message))
-            .finally(() => setUserLoading(false))
+            .finally(() => {
+                setUserLoading(false);
+                setFormLoading(false);
+            })
     }
 
     const saveUserInfo = (name, email) => {
@@ -49,6 +53,7 @@ const GoogleSignIn = ({ from }) => {
             .then(data => {
                 if (data) {
                     setLoginEmail(email);
+                    setFormLoading(false);
                 }
             })
             .catch(error => toast.error(error.message))

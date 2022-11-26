@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import BookingModal from '../../Components/BookingModal/BookingModal';
+import Loader from '../../Components/Loader/Loader';
 import ProductCard from '../../Components/ProductCard/ProductCard';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 
@@ -37,7 +38,7 @@ const CategoryProducts = () => {
             <div className='divider bg-neutral-content h-0.5 opacity-50 mt-2 mb-6'></div>
             {
                 isLoading ?
-                    <p>Loading</p>
+                    <Loader>Loading Products...</Loader>
                     :
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
                         {

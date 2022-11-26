@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react';
 import CategoryCard from '../../../Components/CategoryCard/CategoryCard';
+import Loader from '../../../Components/Loader/Loader';
 
 const CategorySection = () => {
 
@@ -18,7 +19,7 @@ const CategorySection = () => {
             <div className='divider bg-neutral-content h-0.5 opacity-50 mt-2 mb-6'></div>
             {
                 isLoading ?
-                    <p>loading</p>
+                    <Loader>Loading Categories...</Loader>
                     :
                     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
                         {

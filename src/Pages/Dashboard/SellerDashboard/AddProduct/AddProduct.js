@@ -1,14 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../../Contexts/AuthProvider/AuthProvider';
 import { format } from 'date-fns';
 import toast from 'react-hot-toast';
+import FormLoader from '../../../../Components/FormLoader/FormLoader';
 
 const AddProduct = () => {
 
     const { userInfo } = useContext(AuthContext);
     const { register, handleSubmit, reset } = useForm();
+    const [formLoading, setFormLoading] = useState(false);
 
     const { isLoading, data: categories } = useQuery({
         queryKey: ['categories'],
@@ -25,6 +27,7 @@ const AddProduct = () => {
     })
 
     const handleForm = (data) => {
+        setFormLoading(true);
         const sellerName = user.name;
         const sellerEmail = user.email;
         const sellerStatus = user.status;
@@ -76,14 +79,18 @@ const AddProduct = () => {
                                 reset();
                             }
                         })
-                        .catch(error => console.log(error))
+                        .catch(error => toast.error(error.message))
+                        .finally(() => setFormLoading(false))
                 }
             })
             .catch(error => console.log(error))
     }
 
     return (
-        <div>
+        <div className='relative'>
+            {
+                formLoading && <FormLoader>Adding Product...</FormLoader>
+            }
             <h2 className='text-center text-2xl font-medium pb-4'>Add a Product</h2>
             <form onSubmit={handleSubmit(handleForm)} className='max-w-md rounded-lg flex flex-col gap-4 flex-1 mx-auto'>
                 <input {...register('name')} type="text" placeholder="Product Name" className="input input-bordered w-full" required />

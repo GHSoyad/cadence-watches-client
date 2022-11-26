@@ -1,17 +1,19 @@
 import { format } from 'date-fns';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
+import FormLoader from '../FormLoader/FormLoader';
 
 const BookingModal = ({ bookProduct, refetch, setBookProduct }) => {
 
     const { _id, name, resalePrice, sellerEmail, image } = bookProduct;
     const { userInfo } = useContext(AuthContext);
     const { register, handleSubmit } = useForm();
+    const [formLoading, setFormLoading] = useState(false);
 
     const handleForm = (data) => {
-
+        setFormLoading(true);
         const date = format(new Date(), 'PPPpp');
 
         const order = {
@@ -49,6 +51,7 @@ const BookingModal = ({ bookProduct, refetch, setBookProduct }) => {
                 }
             })
             .catch(error => toast.error(error.message))
+            .finally(() => setFormLoading(false))
     }
 
     return (
@@ -57,6 +60,9 @@ const BookingModal = ({ bookProduct, refetch, setBookProduct }) => {
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
             <label htmlFor="booking-modal" className="modal cursor-pointer">
                 <label className="modal-box relative" htmlFor="">
+                    {
+                        formLoading && <FormLoader>Booking Product...</FormLoader>
+                    }
                     <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2 pt-1">✕</label>
                     <div className='max-w-md mx-2'>
                         <h3 className="text-lg font-bold">{name}</h3>
