@@ -31,8 +31,13 @@ const DashboardLayout = () => {
                     <ul className="menu w-80 bg-base-100 text-base-content">
                         {/* <!-- Sidebar content here --> */}
                         <li><NavLink to='/dashboard' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined} end>Sidebar Item 1</NavLink></li>
-                        <li><NavLink to='/dashboard/all-sellers' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined} end>All Sellers</NavLink></li>
-                        <li><NavLink to='/dashboard/all-buyers' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined} end>All Buyers</NavLink></li>
+                        {
+                            (userInfo?.role === 'admin') &&
+                            <>
+                                <li><NavLink to='/dashboard/all-sellers' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined} end>All Sellers</NavLink></li>
+                                <li><NavLink to='/dashboard/all-buyers' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined} end>All Buyers</NavLink></li>
+                            </>
+                        }
                         {
                             (userInfo?.role === 'seller') &&
                             <>

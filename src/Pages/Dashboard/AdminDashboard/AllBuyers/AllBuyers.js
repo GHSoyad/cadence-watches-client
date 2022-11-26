@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
-import ConfirmModal from '../../../../../Components/ConfirmModal/ConfirmModal';
-import Loader from '../../../../../Components/Loader/Loader';
+import ConfirmModal from '../../../../Components/ConfirmModal/ConfirmModal';
+import Loader from '../../../../Components/Loader/Loader';
 
 const AllBuyers = () => {
 
