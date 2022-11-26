@@ -1,11 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import ConfirmModal from '../../../../../Components/ConfirmModal/ConfirmModal';
 import Loader from '../../../../../Components/Loader/Loader';
 
 const AllBuyers = () => {
 
+    const [buyerInfo, setBuyerInfo] = useState(null);
     const { isLoading, data: buyers, refetch } = useQuery({
         queryKey: ['buyers'],
         queryFn: () =>
@@ -13,7 +15,8 @@ const AllBuyers = () => {
                 .then(data => data.data)
     })
 
-    const handleDelete = (id) => {
+    const handleDelete = (data) => {
+        const id = data._id;
         fetch(`http://localhost:5000/users/${id}`, {
             method: 'DELETE',
             headers: {
@@ -47,17 +50,21 @@ const AllBuyers = () => {
                                 </tr>
                             </thead>
                             {
-                                buyers.map((seller, i) =>
-                                    <tbody key={seller._id}>
+                                buyers.map((buyer, i) =>
+                                    <tbody key={buyer._id}>
                                         <tr className='text-sm'>
                                             <th>{i + 1}</th>
-                                            <td>{seller.name}</td>
-                                            <td>{seller.email}</td>
-                                            <td className='text-center py-0'><button onClick={() => handleDelete(seller._id)} className='btn btn-xs hover:glass'>Delete</button></td>
+                                            <td>{buyer.name}</td>
+                                            <td>{buyer.email}</td>
+                                            <td className='text-center py-0'><label onClick={() => setBuyerInfo(buyer)} htmlFor="confirm-modal" className='btn btn-xs hover:glass'>Delete</label></td>
                                         </tr>
                                     </tbody>)
                             }
                         </table>
+                        {
+                            buyerInfo &&
+                            <ConfirmModal modalData={buyerInfo} closeModal={setBuyerInfo} confirm={handleDelete} title={'Delete Buyer'} message={`${buyerInfo.name} will be deleted permanently!`}></ConfirmModal>
+                        }
                     </div>
             }
         </>
