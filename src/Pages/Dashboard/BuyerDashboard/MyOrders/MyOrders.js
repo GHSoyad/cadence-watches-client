@@ -57,7 +57,7 @@ const MyOrders = () => {
                                                 </td>
                                                 <td>{order.product}</td>
                                                 <td className='text-center'>{order.price}</td>
-                                                <td className='text-center py-0'><button className='btn btn-sm pt-1 hover:glass'>Pay</button></td>
+                                                <td className='text-center py-0'>{order.status === 'paid' ? 'Paid' : <Link to={`/dashboard/checkout/${order._id}`}><button className='btn btn-sm border-0 pt-1 hover:glass'>Pay</button></Link>}</td>
                                             </tr>
                                         </tbody>)
                                 }

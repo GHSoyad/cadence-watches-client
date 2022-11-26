@@ -11,7 +11,11 @@ const AllSellers = () => {
     const { isLoading, data: sellers, refetch } = useQuery({
         queryKey: ['sellers'],
         queryFn: () =>
-            axios.get('http://localhost:5000/users?role=seller')
+            axios.get('http://localhost:5000/users?role=seller', {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('cadenceSecretToken')}`
+                }
+            })
                 .then(data => data.data)
     })
 
@@ -74,7 +78,7 @@ const AllSellers = () => {
                                             <th>{i + 1}</th>
                                             <td>{seller.name}</td>
                                             <td>{seller.email}</td>
-                                            <td className='text-center py-0'>{seller?.status === 'verified' ? 'Verified' : <button onClick={() => handleVerify(seller.email)} className='btn btn-xs hover:glass'>Verify</button>}</td>
+                                            <td className='text-center py-0'>{seller?.status === 'verified' ? 'Verified' : <button onClick={() => handleVerify(seller.email)} className='btn btn-xs border-0 hover:glass'>Verify</button>}</td>
                                             <td className='text-center py-0'><label onClick={() => setSellerInfo(seller)} htmlFor="confirm-modal" className='btn btn-xs hover:glass'>Delete</label></td>
                                         </tr>
                                     </tbody>)

@@ -11,7 +11,11 @@ const AllBuyers = () => {
     const { isLoading, data: buyers, refetch } = useQuery({
         queryKey: ['buyers'],
         queryFn: () =>
-            axios.get('http://localhost:5000/users?role=buyer')
+            axios.get('http://localhost:5000/users?role=buyer', {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('cadenceSecretToken')}`
+                }
+            })
                 .then(data => data.data)
     })
 

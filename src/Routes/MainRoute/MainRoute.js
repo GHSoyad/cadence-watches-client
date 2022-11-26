@@ -6,6 +6,7 @@ import Blogs from "../../Pages/Blogs/Blogs";
 import CategoryProducts from "../../Pages/CategoryProducts/CategoryProducts";
 import AllBuyers from "../../Pages/Dashboard/AdminDashboard/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/AdminDashboard/AllSellers/AllSellers";
+import Checkout from "../../Pages/Dashboard/BuyerDashboard/Checkout/Checkout";
 import MyOrders from "../../Pages/Dashboard/BuyerDashboard/MyOrders/MyOrders";
 import AddProduct from "../../Pages/Dashboard/SellerDashboard/AddProduct/AddProduct";
 import MyProducts from "../../Pages/Dashboard/SellerDashboard/MyProducts/MyProducts";
@@ -57,6 +58,11 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard',
                 element: <Dashboard></Dashboard>
+            },
+            {
+                path: '/dashboard/checkout/:id',
+                loader: ({ params }) => fetch(`http://localhost:5000/orders/${params.id}`),
+                element: <Checkout></Checkout>
             },
             {
                 path: '/dashboard/my-orders',

@@ -24,16 +24,17 @@ const Register = () => {
         const email = data.email.toLowerCase();
         const password = data.password;
         const role = data.role;
+        const displayName = name;
 
         createUser(email, password)
             .then(userCredential => {
                 const user = userCredential.user;
-                const currentUser = { ...user, role };
+                const currentUser = { ...user, role, displayName };
                 const profile = { displayName: name };
                 updateUserProfile(profile)
                     .then(() => {
-                        setUserInfo(currentUser);
                         saveUserInfo(name, email, role);
+                        setUserInfo(currentUser);
                     })
                     .catch(error => console.log(error.message))
             })
