@@ -84,8 +84,8 @@ const AddProduct = () => {
 
     return (
         <div>
-            <h2 className='text-center text-2xl font-medium'>Add a Product</h2>
-            <form onSubmit={handleSubmit(handleForm)} className='max-w-md pt-6 rounded-lg flex flex-col gap-4 flex-1 mx-auto'>
+            <h2 className='text-center text-2xl font-medium pb-4'>Add a Product</h2>
+            <form onSubmit={handleSubmit(handleForm)} className='max-w-md rounded-lg flex flex-col gap-4 flex-1 mx-auto'>
                 <input {...register('name')} type="text" placeholder="Product Name" className="input input-bordered w-full" required />
                 <textarea {...register('description')} className="textarea textarea-bordered w-full" placeholder="Description" required></textarea>
                 <input {...register('phone')} type="text" placeholder="Phone Number" className="input input-bordered w-full" required />

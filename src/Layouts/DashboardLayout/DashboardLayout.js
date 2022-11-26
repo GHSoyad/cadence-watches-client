@@ -30,7 +30,7 @@ const DashboardLayout = () => {
                     <label onClick={() => setIsMenuOpen(!isMenuOpen)} htmlFor="dashboard-drawer" className="drawer-overlay"></label>
                     <ul className="menu w-80 bg-base-100 text-base-content">
                         {/* <!-- Sidebar content here --> */}
-                        <li><NavLink to='/dashboard' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined} end>Sidebar Item 1</NavLink></li>
+                        <li><NavLink to='/dashboard' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined} end>Dashboard</NavLink></li>
                         {
                             (userInfo?.role === 'admin') &&
                             <>

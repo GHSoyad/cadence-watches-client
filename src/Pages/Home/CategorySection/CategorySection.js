@@ -15,7 +15,7 @@ const CategorySection = () => {
     return (
         <div>
             <h2 className='text-2xl font-bold'>Categories</h2>
-            <div className='divider bg-neutral-content h-0.5 opacity-50 mt-2'></div>
+            <div className='divider bg-neutral-content h-0.5 opacity-50 mt-2 mb-6'></div>
             {
                 isLoading ?
                     <p>loading</p>

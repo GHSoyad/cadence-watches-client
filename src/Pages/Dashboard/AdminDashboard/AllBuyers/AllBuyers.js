@@ -34,7 +34,8 @@ const AllBuyers = () => {
 
 
     return (
-        <>
+        <div>
+            <h2 className='text-center text-2xl font-medium pb-4'>All Buyers</h2>
             {
                 isLoading ?
                     <Loader>Loading Buyers...</Loader>
@@ -63,11 +64,14 @@ const AllBuyers = () => {
                         </table>
                         {
                             buyerInfo &&
-                            <ConfirmModal modalData={buyerInfo} closeModal={setBuyerInfo} confirm={handleDelete} title={'Delete Buyer'} message={`${buyerInfo.name} will be deleted permanently!`}></ConfirmModal>
+                            <ConfirmModal modalData={buyerInfo} closeModal={setBuyerInfo} confirm={handleDelete}>
+                                <h3 className="font-bold text-lg">Delete Buyer?</h3>
+                                <p className="py-4"><span className='font-bold text-red-500'>"{buyerInfo.name}"</span> will be deleted permanently!</p>
+                            </ConfirmModal>
                         }
                     </div>
             }
-        </>
+        </div>
     );
 };
 

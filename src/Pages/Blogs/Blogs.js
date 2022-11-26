@@ -9,9 +9,9 @@ const Blogs = () => {
     return (
         <div className='container mx-auto max-w-screen-xl px-2 md:px-4 xl:px-0 mt-10'>
             <h1 className='text-center text-2xl font-bold'>Blogs</h1>
-            <div className='divider bg-neutral-content h-0.5 opacity-50 mt-2'></div>
+            <div className='divider bg-neutral-content h-0.5 opacity-50 mt-2 mb-6'></div>
             <div className='grid md:grid-cols-2 gap-5 lg:gap-8 cursor-default'>
-                <div className='flex flex-col gap-4 bg-base-200 p-8 rounded-xl justify-between'>
+                <div className='flex flex-col gap-4 bg-base-200 p-4 lg:p-8 rounded-xl justify-between'>
                     <div className='flex flex-col gap-5'>
                         <div>
                             <h3 className='text-xl font-bold'>What are the different ways to manage a state in a React application?</h3>
@@ -36,7 +36,7 @@ const Blogs = () => {
                         </div>
                     </div>
                 </div>
-                <div className='flex flex-col gap-4 bg-base-200 p-8 rounded-xl justify-between'>
+                <div className='flex flex-col gap-4 bg-base-200 p-4 lg:p-8 rounded-xl justify-between'>
                     <div className='flex flex-col gap-5'>
                         <div>
                             <h3 className='text-xl font-bold'>What is a unit test? Why should we write unit tests?</h3>
@@ -61,7 +61,7 @@ const Blogs = () => {
                         </div>
                     </div>
                 </div>
-                <div className='flex flex-col gap-4 bg-base-200 p-8 rounded-xl justify-between'>
+                <div className='flex flex-col gap-4 bg-base-200 p-4 lg:p-8 rounded-xl justify-between'>
                     <div className='flex flex-col gap-5'>
                         <div>
                             <h3 className='text-xl font-bold'>How does prototypical inheritance work?</h3>
@@ -86,7 +86,7 @@ const Blogs = () => {
                         </div>
                     </div>
                 </div>
-                <div className='flex flex-col gap-4 bg-base-200 p-8 rounded-xl justify-between'>
+                <div className='flex flex-col gap-4 bg-base-200 p-4 lg:p-8 rounded-xl justify-between'>
                     <div className='flex flex-col gap-5'>
                         <div>
                             <h3 className='text-xl font-bold'>React vs. Angular vs. Vue?</h3>

@@ -56,8 +56,10 @@ const MyProducts = () => {
                 }
             })
     }
+
     return (
-        <>
+        <div>
+            <h2 className='text-center text-2xl font-medium pb-4'>My Products</h2>
             {
                 isLoading ?
                     <Loader>Loading Products...</Loader>
@@ -99,7 +101,7 @@ const MyProducts = () => {
                         }
                     </div>
             }
-        </>
+        </div>
     );
 };
 
