@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 const AddProduct = () => {
 
     const { userInfo } = useContext(AuthContext);
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
 
     const { isLoading, data: categories } = useQuery({
         queryKey: ['categories'],
@@ -64,14 +64,16 @@ const AddProduct = () => {
                     fetch('http://localhost:5000/products', {
                         method: 'POST',
                         headers: {
-                            'content-type': 'application/json'
+                            'content-type': 'application/json',
+                            authorization: `Bearer ${localStorage.getItem('cadenceSecretToken')}`
                         },
                         body: JSON.stringify(product)
                     })
                         .then(res => res.json())
                         .then(data => {
                             if (data.acknowledged) {
-                                toast.success('Product Added to Sale.')
+                                toast.success('Product Added to Sale.');
+                                reset();
                             }
                         })
                         .catch(error => console.log(error))

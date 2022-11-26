@@ -31,7 +31,7 @@ const CategoryProducts = () => {
     })
 
     return (
-        <div className='container mx-auto max-w-screen-xl mt-10'>
+        <div className='container mx-auto max-w-screen-xl px-2 md:px-4 xl:px-0 mt-10'>
             <h2 className='text-center text-2xl font-bold'>{categoryId} Category</h2>
             <h2 className='text-center text-lg font-medium'>{products && products.length} products in this category</h2>
             <div className='divider bg-neutral-content h-0.5 opacity-50 mt-2'></div>

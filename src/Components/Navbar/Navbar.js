@@ -23,7 +23,6 @@ const Navbar = () => {
     const menuLinks = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/blogs'>Blogs</NavLink></li>
-
         {
             userInfo && userInfo.uid ?
                 <>
