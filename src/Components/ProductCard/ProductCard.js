@@ -1,8 +1,8 @@
 import React from 'react';
-import { FaMapMarkerAlt } from 'react-icons/fa';
+import { FaFlag, FaMapMarkerAlt } from 'react-icons/fa';
 import { RiCheckboxCircleLine } from 'react-icons/ri';
 
-const ProductCard = ({ product, setBookProduct }) => {
+const ProductCard = ({ product, setBookProduct, setReportProduct }) => {
 
     const { image, name, location, resalePrice, originalPrice, yearsUsed, datePosted, sellerName, sellerStatus } = product;
 
@@ -11,7 +11,10 @@ const ProductCard = ({ product, setBookProduct }) => {
             <figure><img src={image} alt={name} className='w-full max-h-80 object-cover' /></figure>
             <div className="card-body font-medium">
                 <div className='pb-2'>
-                    <h2 className='text-xl font-medium'>{name}</h2>
+                    <div className='flex justify-between items-center gap-2'>
+                        <h2 className='text-xl font-medium'>{name}</h2>
+                        <label onClick={() => setReportProduct(product)} htmlFor="confirm-modal" title='Report' className='cursor-pointer'><FaFlag></FaFlag></label>
+                    </div>
                     <div className='flex'>
                         <span className='text-xs'>{sellerName}</span>
                         {
@@ -21,7 +24,7 @@ const ProductCard = ({ product, setBookProduct }) => {
                 </div>
                 <div className='flex justify-between text-base gap-1 flex-wrap'>
                     <p className=''>Resale: $ <span className='text-lg'>{resalePrice}</span></p>
-                    <p className='line-through text-end'>Original: $ <span className='text-lg'>{originalPrice}</span></p>
+                    <div className='line-through flex items-center'>Original: $ <span className='text-lg'>{originalPrice}</span></div>
                 </div>
                 <div className='flex justify-between gap-1 flex-wrap'>
                     <p className='text-base'>Years Used: {yearsUsed}</p>
