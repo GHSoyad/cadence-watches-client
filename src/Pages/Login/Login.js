@@ -34,7 +34,7 @@ const Login = () => {
             .then(userCredential => {
                 const user = userCredential.user;
 
-                fetch(`http://localhost:5000/user?email=${email}`)
+                fetch(`http://localhost:5000/user?email=${user.email}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data.role) {

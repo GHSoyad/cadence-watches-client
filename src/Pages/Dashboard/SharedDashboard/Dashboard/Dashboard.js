@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../../Contexts/AuthProvider/AuthProvider';
 
 const Dashboard = () => {
+
+    const { userInfo } = useContext(AuthContext);
+
     return (
-        <div className='text-center'>
-            <h2 className='text-2xl font-medium pb-4'>Welcome to dashboard</h2>
-            <p>Use the dashboard menu to navigate</p>
+        <div className='text-center flex flex-col gap-5'>
+            <h2 className='text-2xl font-medium pb-4'>Welcome {userInfo.displayName}</h2>
+            <p className='text-xl'>Use the dashboard menu to navigate</p>
+            <div>
+                <p>Email: {userInfo.email}</p>
+                <p className='capitalize'>Role: {userInfo?.role}</p>
+            </div>
         </div>
     );
 };

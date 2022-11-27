@@ -127,7 +127,7 @@ const AddProduct = () => {
                     </select>
                 </div>
                 <input {...register('image')} type="file" className="file-input file-input-bordered w-full" required />
-                <button className='btn btn-neutral-content hover:glass border-0 mt-4' disabled={userLoading}>Add Product</button>
+                <button className='btn bg-base-300 hover:glass border-0 mt-4' disabled={userLoading || formLoading}>Add Product</button>
             </form>
         </div>
     );
