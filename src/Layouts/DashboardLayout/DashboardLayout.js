@@ -36,6 +36,7 @@ const DashboardLayout = () => {
                             <>
                                 <li><NavLink to='/dashboard/all-sellers' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined} end>All Sellers</NavLink></li>
                                 <li><NavLink to='/dashboard/all-buyers' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined} end>All Buyers</NavLink></li>
+                                <li><NavLink to='/dashboard/reported-products' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined} end>Reported Products</NavLink></li>
                             </>
                         }
                         {

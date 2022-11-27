@@ -45,7 +45,7 @@ const CategoryProducts = () => {
             product: product.name,
         }
 
-        fetch('http://localhost:5000/products/report', {
+        fetch('http://localhost:5000/report/products', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
