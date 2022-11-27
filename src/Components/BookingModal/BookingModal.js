@@ -2,6 +2,7 @@ import { format } from 'date-fns';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 import FormLoader from '../FormLoader/FormLoader';
 
@@ -68,13 +69,20 @@ const BookingModal = ({ bookProduct, refetch, setBookProduct }) => {
                         <h3 className="text-lg font-bold">{name}</h3>
                         <p className='flex items-center text-lg' >Price: $ {resalePrice}</p>
                     </div>
-                    <form onSubmit={handleSubmit(handleForm)} className='max-w-md pt-4 rounded-lg flex flex-col gap-4 flex-1 mx-auto'>
-                        <input value={userInfo?.displayName} className="input input-bordered w-full input-disabled" readOnly />
-                        <input value={userInfo?.email} className="input input-bordered w-full input-disabled" readOnly />
-                        <input {...register('phone')} type="text" placeholder="Phone Number" className="input input-bordered w-full" required />
-                        <input {...register('location')} type="text" placeholder="Location" className="input input-bordered w-full" required />
-                        <button type='submit' className='btn bg-base-300 hover:glass'>Book</button>
-                    </form>
+                    {
+                        userInfo && userInfo.email ?
+                            <form onSubmit={handleSubmit(handleForm)} className='max-w-md pt-4 rounded-lg flex flex-col gap-4 flex-1 mx-auto'>
+                                <input value={userInfo?.displayName} className="input input-bordered w-full input-disabled" readOnly />
+                                <input value={userInfo?.email} className="input input-bordered w-full input-disabled" readOnly />
+                                <input {...register('phone')} type="text" placeholder="Phone Number" className="input input-bordered w-full" required />
+                                <input {...register('location')} type="text" placeholder="Location" className="input input-bordered w-full" required />
+                                <button type='submit' className='btn bg-base-300 hover:glass'>Book</button>
+                            </form>
+                            :
+                            <div className='pt-4'>
+                                <Link to='/login'><button className='btn bg-base-300 hover:glass'>Login to Book</button></Link>
+                            </div>
+                    }
                 </label>
             </label>
         </div>
