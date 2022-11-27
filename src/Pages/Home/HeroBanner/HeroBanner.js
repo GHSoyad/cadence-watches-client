@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const HeroBanner = () => {
     return (
-        <section className="relative bg-hero-cover bg-cover bg-center bg-no-repeat -mt-28 max-h-[50vh] sm:max-h-[80vh]">
+        <section className="relative bg-hero-cover bg-cover bg-center bg-no-repeat -mt-24 max-h-[50vh] sm:max-h-[80vh]">
             <div className="absolute inset-0 bg-base-100/75 sm:bg-transparent sm:bg-gradient-to-r sm:from-base-100/95 sm:to-base-100/5"></div>
 
             <div className="relative mx-auto max-w-screen-xl px-4 sm:px-6 h-[50vh] flex lg:h-screen items-center lg:px-8">
