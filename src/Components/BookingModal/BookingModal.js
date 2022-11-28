@@ -80,7 +80,7 @@ const BookingModal = ({ bookProduct, refetch, setBookProduct }) => {
                             </form>
                             :
                             <div className='pt-4'>
-                                <Link to='/login'><button className='btn bg-base-300 hover:glass'>Login to Book</button></Link>
+                                <Link to='/login'><button className='btn bg-base-300 hover:glass' disabled={formLoading}>Login to Book</button></Link>
                             </div>
                     }
                 </label>

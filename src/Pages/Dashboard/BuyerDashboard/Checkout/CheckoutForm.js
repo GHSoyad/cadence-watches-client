@@ -101,7 +101,7 @@ const CheckoutForm = ({ order }) => {
                         toast.success('Payment Confirmed.')
                     }
                 })
-                .catch(error => console.log(error))
+                .catch(error => toast.error(error.message))
         }
         setPaymentProcessing(false);
 

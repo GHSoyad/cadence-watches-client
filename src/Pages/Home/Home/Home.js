@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import AdvertisedProducts from '../AdvertisedProducts/AdvertisedProducts';
 import CategorySection from '../CategorySection/CategorySection';
 import FeatureSection from '../FeatureSection/FeatureSection';
@@ -18,6 +19,7 @@ const Home = () => {
 
     return (
         <div className='flex flex-col gap-20 my-10'>
+            <Helmet><title>Home - Cadence</title></Helmet>
             <HeroBanner></HeroBanner>
             <CategorySection></CategorySection>
             {

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { format } from 'date-fns/esm';
 import React, { useContext, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import toast from 'react-hot-toast';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import BookingModal from '../../Components/BookingModal/BookingModal';
@@ -62,15 +63,13 @@ const CategoryProducts = () => {
                     toast.error(data.message)
                 }
             })
-            .catch(error => console.log(error.message))
-
-        console.log(reportedProduct)
+            .catch(error => toast.error(error.message))
     }
 
     return (
         <div className='container mx-auto max-w-screen-xl px-2 md:px-4 xl:px-0 mt-10'>
-            <h2 className='text-center text-2xl font-bold'>{categoryId} Category</h2>
-            <h2 className='text-center text-lg font-medium'>{products && products.length} products in this category</h2>
+            <Helmet><title>{categoryId} - Cadence</title></Helmet>
+            <h2 className='text-center text-2xl font-bold'>{categoryId} - {products && products.length} <span className='text-xl font-medium'>Products</span></h2>
             <div className='divider bg-neutral-content h-0.5 opacity-50 mt-2 mb-6'></div>
             {
                 isLoading ?

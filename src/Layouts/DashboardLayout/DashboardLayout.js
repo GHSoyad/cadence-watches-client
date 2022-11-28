@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, ScrollRestoration } from 'react-router-dom';
 import Navbar from '../../Components/Navbar/Navbar';
 import { RiCloseFill, RiDashboardFill } from "react-icons/ri";
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
@@ -55,6 +55,7 @@ const DashboardLayout = () => {
                     </ul>
                 </div>
             </div>
+            <ScrollRestoration></ScrollRestoration>
         </div>
     );
 };

@@ -12,7 +12,7 @@ const HeroBanner = () => {
                         Buy and Sell Watches
                     </h1>
                     <p className="my-4 max-w-lg sm:text-xl sm:leading-relaxed">
-                        A place to safely sell and purchase the watches you love!
+                        A place to safely Purchase and Resale the watches you love!
                     </p>
                     <Link to='/login'><button className='btn sm:btn-wide bg-base-300 border-0 hover:glass'>Get Started</button></Link>
                 </div>

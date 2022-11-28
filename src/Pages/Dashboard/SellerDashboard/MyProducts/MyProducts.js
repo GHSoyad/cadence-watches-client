@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import toast from 'react-hot-toast';
 import ConfirmModal from '../../../../Components/ConfirmModal/ConfirmModal';
 import Loader from '../../../../Components/Loader/Loader';
@@ -51,7 +52,7 @@ const MyProducts = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.deletedCount > 0) {
-                    toast.success('Seller deleted!');
+                    toast.success('Product deleted!');
                     refetch();
                 }
             })
@@ -59,6 +60,7 @@ const MyProducts = () => {
 
     return (
         <div>
+            <Helmet><title>My Products - Cadence</title></Helmet>
             <h2 className='text-center text-2xl font-medium pb-4'>My Products</h2>
             {
                 isLoading ?

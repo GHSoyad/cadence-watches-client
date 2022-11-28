@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Loader from '../../../../Components/Loader/Loader';
 import { AuthContext } from '../../../../Contexts/AuthProvider/AuthProvider';
@@ -22,6 +23,7 @@ const MyOrders = () => {
 
     return (
         <div>
+            <Helmet><title>My Orders - Cadence</title></Helmet>
             <h2 className='text-center text-2xl font-medium pb-4'>My Orders</h2>
             {
                 isLoading ?

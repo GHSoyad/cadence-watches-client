@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider/AuthProvider';
 import useToken from '../Hooks/useToken';
 
-const GoogleSignIn = ({ from, setFormLoading }) => {
+const GoogleSignIn = ({ from, formLoading, setFormLoading }) => {
 
     const { signInWithGoogle, setUserInfo, setUserLoading } = useContext(AuthContext);
     const [loginEmail, setLoginEmail] = useState('');
@@ -59,7 +59,7 @@ const GoogleSignIn = ({ from, setFormLoading }) => {
             .catch(error => toast.error(error.message))
     }
 
-    return <button onClick={handleGoogleSignIn} className='btn btn-neutral-content hover:glass border-0 mt-2 w-full' >Continue with Google</button>
+    return <button onClick={handleGoogleSignIn} className='btn btn-neutral-content hover:glass border-0 mt-2 w-full' disabled={formLoading} >Continue with Google</button>
 };
 
 export default GoogleSignIn;

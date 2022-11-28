@@ -5,12 +5,15 @@ import { AuthContext } from '../../../../Contexts/AuthProvider/AuthProvider';
 import { format } from 'date-fns';
 import toast from 'react-hot-toast';
 import FormLoader from '../../../../Components/FormLoader/FormLoader';
+import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const AddProduct = () => {
 
     const { userInfo } = useContext(AuthContext);
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit } = useForm();
     const [formLoading, setFormLoading] = useState(false);
+    const navigate = useNavigate();
 
     const { isLoading, data: categories } = useQuery({
         queryKey: ['categories'],
@@ -76,18 +79,19 @@ const AddProduct = () => {
                         .then(data => {
                             if (data.acknowledged) {
                                 toast.success('Product Added to Sale.');
-                                reset();
+                                navigate('/dashboard/my-products');
                             }
                         })
                         .catch(error => toast.error(error.message))
                         .finally(() => setFormLoading(false))
                 }
             })
-            .catch(error => console.log(error))
+            .catch(error => toast.error(error.message))
     }
 
     return (
         <div className='relative'>
+            <Helmet><title>Add Product - Cadence</title></Helmet>
             {
                 formLoading && <FormLoader>Adding Product...</FormLoader>
             }

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
@@ -78,6 +79,7 @@ const Register = () => {
 
     return (
         <div className='container mx-auto max-w-screen-xl px-2 md:px-4 xl:px-0 flex justify-center mt-20'>
+            <Helmet><title>Register - Cadence</title></Helmet>
             <div className='max-w-md p-6 border border-neutral-content rounded-lg flex-1 relative'>
                 {
                     formLoading && <FormLoader>Registering...</FormLoader>
@@ -128,11 +130,11 @@ const Register = () => {
                     {
                         errors.password && <p className='text-sm text-red-500'>{errors.password?.message}</p>
                     }
-                    <button type='submit' className='btn btn-neutral-content hover:glass border-0 mt-2'>Register</button>
+                    <button type='submit' className='btn btn-neutral-content hover:glass border-0 mt-2' disabled={formLoading}>Register</button>
                     <p className='text-sm text-center'>Already Have an Account? <Link to='/login' className='font-bold text-base hover:underline'>Login</Link></p>
                 </form>
                 <div className="divider">OR</div>
-                <GoogleSignIn></GoogleSignIn>
+                <GoogleSignIn setFormLoading={setFormLoading} formLoading={formLoading}></GoogleSignIn>
             </div>
         </div>
     );

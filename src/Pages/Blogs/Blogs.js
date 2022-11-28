@@ -4,10 +4,12 @@ import react from '../../Assets/images/react-js.png';
 import proto from '../../Assets/images/prototypical-inheritance.png';
 import unit from '../../Assets/images/unit-test.png';
 import rav from '../../Assets/images/react-angular-vue.jpeg';
+import { Helmet } from 'react-helmet-async';
 
 const Blogs = () => {
     return (
         <div className='container mx-auto max-w-screen-xl px-2 md:px-4 xl:px-0 mt-10'>
+            <Helmet><title>Blogs - Cadence</title></Helmet>
             <h1 className='text-center text-2xl font-bold'>Blogs</h1>
             <div className='divider bg-neutral-content h-0.5 opacity-50 mt-2 mb-6'></div>
             <div className='grid md:grid-cols-2 gap-5 lg:gap-8 cursor-default'>

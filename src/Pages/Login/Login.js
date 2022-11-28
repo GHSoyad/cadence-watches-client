@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -45,7 +46,7 @@ const Login = () => {
                             setFormLoading(false);
                         }
                     })
-                    .catch(error => console.log(error))
+                    .catch(error => toast.error(error.message))
             })
             .catch(error => toast.error(error.message))
             .finally(() => {
@@ -56,6 +57,7 @@ const Login = () => {
 
     return (
         <div className='container mx-auto max-w-screen-xl px-2 md:px-4 xl:px-0 flex justify-center mt-20'>
+            <Helmet><title>Login - Cadence</title></Helmet>
             <div className='max-w-md p-6 border border-neutral-content rounded-lg flex-1 relative'>
                 {
                     formLoading && <FormLoader>Logging in...</FormLoader>
@@ -75,11 +77,11 @@ const Login = () => {
                             </label>
                             <input {...register('password')} type="password" placeholder="Your Password" className="input input-bordered w-full" />
                         </div>
-                        <button className='btn btn-neutral-content hover:glass border-0 mt-4'>Login</button>
+                        <button className='btn btn-neutral-content hover:glass border-0 mt-4' disabled={formLoading}>Login</button>
                         <p className='text-sm text-center'>Don't Have an Account? <Link to='/register' className='font-bold text-base hover:underline'>Register</Link></p>
                     </form>
                     <div className="divider">OR</div>
-                    <GoogleSignIn from={from} setFormLoading={setFormLoading}></GoogleSignIn>
+                    <GoogleSignIn from={from} setFormLoading={setFormLoading} formLoading={formLoading}></GoogleSignIn>
                 </>
             </div>
         </div>

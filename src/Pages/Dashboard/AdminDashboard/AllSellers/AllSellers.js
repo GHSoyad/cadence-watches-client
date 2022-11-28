@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import toast from 'react-hot-toast';
 import ConfirmModal from '../../../../Components/ConfirmModal/ConfirmModal';
 import Loader from '../../../../Components/Loader/Loader';
@@ -55,6 +56,7 @@ const AllSellers = () => {
 
     return (
         <div>
+            <Helmet><title>All Sellers - Cadence</title></Helmet>
             <h2 className='text-center text-2xl font-medium pb-4'>All Sellers</h2>
             {
                 isLoading ?
