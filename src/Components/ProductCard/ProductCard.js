@@ -1,6 +1,8 @@
 import React from 'react';
 import { FaFlag, FaMapMarkerAlt } from 'react-icons/fa';
 import { RiCheckboxCircleLine } from 'react-icons/ri';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const ProductCard = ({ product, setBookProduct, setReportProduct }) => {
 
@@ -8,7 +10,11 @@ const ProductCard = ({ product, setBookProduct, setReportProduct }) => {
 
     return (
         <div className="card card-compact shadow-xl transition-opacity bg-base-200">
-            <figure><img src={image} alt={name} className='w-full max-h-80 object-cover' /></figure>
+            <PhotoProvider maskOpacity={0.85}>
+                <PhotoView src={image}>
+                    <figure><img src={image} alt={name} className='w-full max-h-80 object-cover' /></figure>
+                </PhotoView>
+            </PhotoProvider>
             <div className="card-body font-medium">
                 <div className='pb-2'>
                     <div className='flex justify-between items-center gap-2'>

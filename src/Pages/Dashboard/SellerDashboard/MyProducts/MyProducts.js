@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import ConfirmModal from '../../../../Components/ConfirmModal/ConfirmModal';
 import Loader from '../../../../Components/Loader/Loader';
 import { AuthContext } from '../../../../Contexts/AuthProvider/AuthProvider';
@@ -69,43 +70,48 @@ const MyProducts = () => {
             {
                 isLoading ?
                     <Loader>Loading Products...</Loader>
-                    :
-                    <div className="overflow-x-auto">
-                        <table className="table w-full">
-                            <thead className='text-base'>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Name</th>
-                                    <th>Category</th>
-                                    <th className='text-center'>Price</th>
-                                    <th className='text-center'>Status</th>
-                                    <th className='text-center'>Advertise</th>
-                                    <th className='text-center'>Delete</th>
-                                </tr>
-                            </thead>
+                    : products.length === 0 ?
+                        <div className='text-center pt-6'>
+                            <p className='text-xl font-medium pb-4'>No products found</p>
+                            <Link to='/dashboard/add-product'><button className='btn bg-base-300 hover:glass'>Add Product</button></Link>
+                        </div>
+                        :
+                        <div className="overflow-x-auto">
+                            <table className="table w-full">
+                                <thead className='text-base'>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Name</th>
+                                        <th>Category</th>
+                                        <th className='text-center'>Price</th>
+                                        <th className='text-center'>Status</th>
+                                        <th className='text-center'>Advertise</th>
+                                        <th className='text-center'>Delete</th>
+                                    </tr>
+                                </thead>
+                                {
+                                    products.map((product, i) =>
+                                        <tbody key={product._id}>
+                                            <tr className='text-sm'>
+                                                <th>{i + 1}</th>
+                                                <td>{product.name}</td>
+                                                <td>{product.category}</td>
+                                                <td className='text-center'>{product.resalePrice}</td>
+                                                <td className='text-center'>{product?.status === 'sold' ? 'Sold' : 'Available'}</td>
+                                                <td className='text-center py-0'>{product?.advertise ? 'Advertised' : product?.status === 'sold' ? '--' : <button onClick={() => handleAd(product._id)} className='btn btn-xs hover:glass'>Advertise</button>}</td>
+                                                <td className='text-center py-0'><label onClick={() => setProductInfo(product)} htmlFor="confirm-modal" className='btn btn-xs hover:glass'>Delete</label></td>
+                                            </tr>
+                                        </tbody>)
+                                }
+                            </table>
                             {
-                                products.map((product, i) =>
-                                    <tbody key={product._id}>
-                                        <tr className='text-sm'>
-                                            <th>{i + 1}</th>
-                                            <td>{product.name}</td>
-                                            <td>{product.category}</td>
-                                            <td className='text-center'>{product.resalePrice}</td>
-                                            <td className='text-center'>{product?.status === 'sold' ? 'Sold' : 'Available'}</td>
-                                            <td className='text-center py-0'>{product?.advertise ? 'Advertised' : product?.status === 'sold' ? '--' : <button onClick={() => handleAd(product._id)} className='btn btn-xs hover:glass'>Advertise</button>}</td>
-                                            <td className='text-center py-0'><label onClick={() => setProductInfo(product)} htmlFor="confirm-modal" className='btn btn-xs hover:glass'>Delete</label></td>
-                                        </tr>
-                                    </tbody>)
+                                productInfo &&
+                                <ConfirmModal modalData={productInfo} closeModal={setProductInfo} confirm={handleDelete}>
+                                    <h3 className="font-bold text-lg">Delete product?</h3>
+                                    <p className="py-4"><span className='font-bold text-red-500'>"{productInfo.name}"</span> will be deleted permanently!</p>
+                                </ConfirmModal>
                             }
-                        </table>
-                        {
-                            productInfo &&
-                            <ConfirmModal modalData={productInfo} closeModal={setProductInfo} confirm={handleDelete}>
-                                <h3 className="font-bold text-lg">Delete product?</h3>
-                                <p className="py-4"><span className='font-bold text-red-500'>"{productInfo.name}"</span> will be deleted permanently!</p>
-                            </ConfirmModal>
-                        }
-                    </div>
+                        </div>
             }
         </div>
     );

@@ -47,39 +47,43 @@ const ReportedProducts = () => {
             {
                 isLoading ?
                     <Loader>Loading Reported Products...</Loader>
-                    :
-                    <div className="overflow-x-auto">
-                        <table className="table w-full">
-                            <thead className='text-base'>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Product</th>
-                                    <th>Reporter</th>
-                                    <th>Seller</th>
-                                    <th className='text-center'>Delete</th>
-                                </tr>
-                            </thead>
+                    : reportedProducts.length === 0 ?
+                        <div className='text-center pt-6'>
+                            <p className='text-xl font-medium pb-4'>No reported products found</p>
+                        </div>
+                        :
+                        <div className="overflow-x-auto">
+                            <table className="table w-full">
+                                <thead className='text-base'>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Product</th>
+                                        <th>Reporter</th>
+                                        <th>Seller</th>
+                                        <th className='text-center'>Delete</th>
+                                    </tr>
+                                </thead>
+                                {
+                                    reportedProducts.map((product, i) =>
+                                        <tbody key={product._id}>
+                                            <tr className='text-sm'>
+                                                <th>{i + 1}</th>
+                                                <td>{product.product}</td>
+                                                <td>{product.reporter}</td>
+                                                <td>{product.sellerEmail}</td>
+                                                <td className='text-center py-0'><label onClick={() => setProductInfo(product)} htmlFor="confirm-modal" className='btn btn-xs hover:glass'>Delete</label></td>
+                                            </tr>
+                                        </tbody>)
+                                }
+                            </table>
                             {
-                                reportedProducts.map((product, i) =>
-                                    <tbody key={product._id}>
-                                        <tr className='text-sm'>
-                                            <th>{i + 1}</th>
-                                            <td>{product.product}</td>
-                                            <td>{product.reporter}</td>
-                                            <td>{product.sellerEmail}</td>
-                                            <td className='text-center py-0'><label onClick={() => setProductInfo(product)} htmlFor="confirm-modal" className='btn btn-xs hover:glass'>Delete</label></td>
-                                        </tr>
-                                    </tbody>)
+                                productInfo &&
+                                <ConfirmModal modalData={productInfo} closeModal={setProductInfo} confirm={handleDelete}>
+                                    <h3 className="font-bold text-lg">Delete Seller?</h3>
+                                    <p className="py-4"><span className='font-bold text-red-500'>"{productInfo.name}"</span> will be deleted permanently!</p>
+                                </ConfirmModal>
                             }
-                        </table>
-                        {
-                            productInfo &&
-                            <ConfirmModal modalData={productInfo} closeModal={setProductInfo} confirm={handleDelete}>
-                                <h3 className="font-bold text-lg">Delete Seller?</h3>
-                                <p className="py-4"><span className='font-bold text-red-500'>"{productInfo.name}"</span> will be deleted permanently!</p>
-                            </ConfirmModal>
-                        }
-                    </div>
+                        </div>
             }
         </div>
     );
