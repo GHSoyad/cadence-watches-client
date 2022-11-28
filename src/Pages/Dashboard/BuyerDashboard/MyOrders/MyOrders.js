@@ -10,6 +10,7 @@ const MyOrders = () => {
 
     const { userInfo } = useContext(AuthContext);
 
+    // Get orders data
     const { isLoading, data: orders } = useQuery({
         queryKey: ['orders', userInfo.email],
         queryFn: () =>

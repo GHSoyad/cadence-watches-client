@@ -26,6 +26,7 @@ const Login = () => {
         }
     }, [token, from, navigate])
 
+    // Handle login
     const handleForm = (data) => {
         setFormLoading(true);
         const email = data.email;

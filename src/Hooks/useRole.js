@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 
+// Hook to get user role
 const useRole = (email) => {
     const [role, setRole] = useState('');
     const [roleLoading, setRoleLoading] = useState(true);

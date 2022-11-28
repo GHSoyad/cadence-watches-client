@@ -13,30 +13,36 @@ const AuthProvider = ({ children }) => {
     const [currentUserEmail, setCurrentUserEmail] = useState('')
     const [role] = useRole(currentUserEmail);
 
+    // Create user with password and email
     const createUser = (email, password) => {
         setUserLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
+    // Sign in user with password and email
     const signInWithEmail = (email, password) => {
         setUserLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
 
+    // Sign out user
     const signOutUser = () => {
         localStorage.removeItem('cadenceSecretToken');
         return signOut(auth);
     }
 
+    // Update user profile
     const updateUserProfile = (profile) => {
         return updateProfile(auth.currentUser, profile);
     }
 
+    // Sign in user with google
     const signInWithGoogle = () => {
         setUserLoading(true);
         return signInWithPopup(auth, googleProvider);
     }
 
+    // Get signed in user data
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setCurrentUserEmail(currentUser?.email);

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 
+// Hook to get secret token
 const useToken = (email) => {
     const [token, setToken] = useState('');
 

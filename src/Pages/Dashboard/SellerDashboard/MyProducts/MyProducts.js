@@ -12,6 +12,7 @@ const MyProducts = () => {
     const { userInfo } = useContext(AuthContext);
     const [productInfo, setProductInfo] = useState(null);
 
+    // Get products data
     const { isLoading, data: products, refetch } = useQuery({
         queryKey: ['my-products', userInfo.email],
         queryFn: () =>
@@ -23,6 +24,7 @@ const MyProducts = () => {
                 .then(data => data.data)
     })
 
+    // Update product data
     const handleAd = (id) => {
         fetch(`http://localhost:5000/products/${id}`, {
             method: 'PATCH',
@@ -37,9 +39,10 @@ const MyProducts = () => {
                     refetch();
                 }
             })
-            .catch(error => console.log(error))
+            .catch(error => toast.error(error.message))
     }
 
+    // Delete product
     const handleDelete = (product) => {
         const id = product._id;
 
@@ -56,6 +59,7 @@ const MyProducts = () => {
                     refetch();
                 }
             })
+            .catch(error => toast.error(error.message))
     }
 
     return (

@@ -42,7 +42,7 @@ const Register = () => {
                         saveUserInfo(name, email, role);
                         setUserInfo(currentUser);
                     })
-                    .catch(error => console.log(error.message))
+                    .catch(error => toast.error(error.message))
             })
             .catch(error => toast.error(error.message))
             .finally(() => {

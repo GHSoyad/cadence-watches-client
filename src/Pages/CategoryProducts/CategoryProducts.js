@@ -17,8 +17,9 @@ const CategoryProducts = () => {
     const navigate = useNavigate();
     const [bookProduct, setBookProduct] = useState(null);
     const [reportProduct, setReportProduct] = useState(null);
-
     const categoryId = useLoaderData();
+
+    // Get reports data
     const { isLoading, data: products, refetch } = useQuery({
         queryKey: ['products', categoryId],
         queryFn: () =>
@@ -36,8 +37,8 @@ const CategoryProducts = () => {
                 })
     })
 
+    // Post report
     const handleReport = (product) => {
-
         const reportedProduct = {
             productId: product._id,
             reporter: userInfo.email,

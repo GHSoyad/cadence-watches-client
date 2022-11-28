@@ -12,6 +12,8 @@ const DashboardLayout = () => {
     return (
         <div className='container mx-auto max-w-screen-xl'>
             <Navbar></Navbar>
+
+            {/* Dashboard menu toggler */}
             <div className='lg:hidden px-2 mb-1'>
                 <label onClick={() => setIsMenuOpen(!isMenuOpen)} htmlFor="dashboard-drawer" className="btn btn-ghost text-right">{
                     isMenuOpen ?
@@ -31,6 +33,8 @@ const DashboardLayout = () => {
                     <ul className="menu w-80 bg-base-100 text-base-content">
                         {/* <!-- Sidebar content here --> */}
                         <li><NavLink to='/dashboard' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined} end>Dashboard</NavLink></li>
+
+                        {/* Admin dashboard */}
                         {
                             (userInfo?.role === 'admin') &&
                             <>
@@ -39,6 +43,8 @@ const DashboardLayout = () => {
                                 <li><NavLink to='/dashboard/reported-products' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined} end>Reported Products</NavLink></li>
                             </>
                         }
+
+                        {/* Seller dashboard */}
                         {
                             (userInfo?.role === 'seller') &&
                             <>
@@ -46,6 +52,8 @@ const DashboardLayout = () => {
                                 <li><NavLink to='/dashboard/add-product' className={({ isActive }) => isActive ? 'bg-neutral-focus text-white' : undefined}>Add Product</NavLink></li>
                             </>
                         }
+
+                        {/* Buyer dashboard */}
                         {
                             (userInfo?.role === 'buyer') &&
                             <>

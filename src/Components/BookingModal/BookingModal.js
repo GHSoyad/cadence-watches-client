@@ -13,6 +13,7 @@ const BookingModal = ({ bookProduct, refetch, setBookProduct }) => {
     const { register, handleSubmit } = useForm();
     const [formLoading, setFormLoading] = useState(false);
 
+    // Post booking/order
     const handleForm = (data) => {
         setFormLoading(true);
         const date = format(new Date(), 'PPPpp');

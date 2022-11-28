@@ -10,6 +10,7 @@ import TestimonialSection from '../TestimonialSection/TestimonialSection';
 
 const Home = () => {
 
+    // Get advertised products
     const { isLoading, data: advertisedProducts, refetch } = useQuery({
         queryKey: ['advertisedProducts'],
         queryFn: () =>

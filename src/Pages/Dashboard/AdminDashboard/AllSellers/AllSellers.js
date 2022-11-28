@@ -9,6 +9,8 @@ import Loader from '../../../../Components/Loader/Loader';
 const AllSellers = () => {
 
     const [sellerInfo, setSellerInfo] = useState(null);
+
+    // Get sellers data
     const { isLoading, data: sellers, refetch } = useQuery({
         queryKey: ['sellers'],
         queryFn: () =>
@@ -20,6 +22,7 @@ const AllSellers = () => {
                 .then(data => data.data)
     })
 
+    // Delete seller
     const handleDelete = (data) => {
         const id = data._id;
 
@@ -38,6 +41,7 @@ const AllSellers = () => {
             })
     }
 
+    // Verify seller
     const handleVerify = (email) => {
         fetch(`http://localhost:5000/users?email=${email}`, {
             method: 'PATCH',

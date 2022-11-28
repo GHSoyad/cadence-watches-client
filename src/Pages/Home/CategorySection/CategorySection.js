@@ -6,6 +6,7 @@ import Loader from '../../../Components/Loader/Loader';
 
 const CategorySection = () => {
 
+    // Get categories data
     const { isLoading, data: categories } = useQuery({
         queryKey: ['categories'],
         queryFn: () =>

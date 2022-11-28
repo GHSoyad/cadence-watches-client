@@ -9,6 +9,8 @@ import Loader from '../../../../Components/Loader/Loader';
 const AllBuyers = () => {
 
     const [buyerInfo, setBuyerInfo] = useState(null);
+
+    // Get buyers data
     const { isLoading, data: buyers, refetch } = useQuery({
         queryKey: ['buyers'],
         queryFn: () =>
@@ -20,6 +22,7 @@ const AllBuyers = () => {
                 .then(data => data.data)
     })
 
+    // Delete buyer
     const handleDelete = (data) => {
         const id = data._id;
         fetch(`http://localhost:5000/users/${id}`, {

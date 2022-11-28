@@ -18,6 +18,7 @@ const GoogleSignIn = ({ from, formLoading, setFormLoading }) => {
         }
     }, [token, navigate, from])
 
+    // Sign in with google
     const handleGoogleSignIn = () => {
         setFormLoading(true);
         signInWithGoogle()
@@ -35,6 +36,7 @@ const GoogleSignIn = ({ from, formLoading, setFormLoading }) => {
             })
     }
 
+    // Save user data to database
     const saveUserInfo = (name, email) => {
         const user = {
             name,

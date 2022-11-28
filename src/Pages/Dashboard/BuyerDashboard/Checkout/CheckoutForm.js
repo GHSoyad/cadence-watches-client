@@ -14,8 +14,9 @@ const CheckoutForm = ({ order }) => {
     const [paymentSuccess, setPaymentSuccess] = useState('');
     const price = parseFloat(originalPrice);
 
+    // Get client secret
     useEffect(() => {
-        fetch('http://localhost:5000/create=payment-intent', {
+        fetch('http://localhost:5000/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -32,7 +33,7 @@ const CheckoutForm = ({ order }) => {
             .catch(error => console.log(error))
     }, [price])
 
-
+    // Handle stripe payment
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!stripe || !elements) {
@@ -86,6 +87,7 @@ const CheckoutForm = ({ order }) => {
                 transactionId
             }
 
+            // Post payment
             fetch('http://localhost:5000/payments', {
                 method: 'POST',
                 headers: {

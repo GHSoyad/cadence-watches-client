@@ -10,6 +10,7 @@ const ReportedProducts = () => {
 
     const [productInfo, setProductInfo] = useState(null);
 
+    // Get reported products data
     const { isLoading, data: reportedProducts, refetch } = useQuery({
         queryKey: ['reportedProducts'],
         queryFn: () => axios.get('http://localhost:5000/report/products', {
@@ -20,6 +21,7 @@ const ReportedProducts = () => {
             .then(data => data.data)
     })
 
+    // Delete reported product
     const handleDelete = (product) => {
         const productId = product.productId;
 

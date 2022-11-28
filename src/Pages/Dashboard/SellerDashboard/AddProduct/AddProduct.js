@@ -15,6 +15,7 @@ const AddProduct = () => {
     const [formLoading, setFormLoading] = useState(false);
     const navigate = useNavigate();
 
+    // Get categories data
     const { isLoading, data: categories } = useQuery({
         queryKey: ['categories'],
         queryFn: () =>
@@ -22,18 +23,12 @@ const AddProduct = () => {
                 .then(res => res.json())
     })
 
-    const { isLoading: userLoading, data: user } = useQuery({
-        queryKey: ['user', userInfo?.email],
-        queryFn: () =>
-            fetch(`http://localhost:5000/user?email=${userInfo.email}`)
-                .then(res => res.json())
-    })
-
+    // Post product
     const handleForm = (data) => {
         setFormLoading(true);
-        const sellerName = user.name;
-        const sellerEmail = user.email;
-        const sellerStatus = user.status;
+        const sellerName = userInfo.name;
+        const sellerEmail = userInfo.email;
+        const sellerStatus = userInfo.status;
         const date = format(new Date(), 'PPPpp');
         const image = data.image[0];
         const formData = new FormData();
@@ -131,7 +126,7 @@ const AddProduct = () => {
                     </select>
                 </div>
                 <input {...register('image')} type="file" className="file-input file-input-bordered w-full" required />
-                <button className='btn bg-base-300 hover:glass border-0 mt-4' disabled={userLoading || formLoading}>Add Product</button>
+                <button className='btn bg-base-300 hover:glass border-0 mt-4' disabled={formLoading}>Add Product</button>
             </form>
         </div>
     );
