@@ -23,7 +23,7 @@ const CategoryProducts = () => {
     const { isLoading, data: products, refetch } = useQuery({
         queryKey: ['products', categoryId],
         queryFn: () =>
-            axios.get(`http://localhost:5000/category/${categoryId}`, {
+            axios.get(`https://cadence-watches-server.vercel.app/category/${categoryId}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('cadenceSecretToken')}`
                 }
@@ -47,7 +47,7 @@ const CategoryProducts = () => {
             product: product.name,
         }
 
-        fetch('http://localhost:5000/report/products', {
+        fetch('https://cadence-watches-server.vercel.app/report/products', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

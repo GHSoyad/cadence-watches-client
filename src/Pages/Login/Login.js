@@ -18,10 +18,11 @@ const Login = () => {
     const [loginEmail, setLoginEmail] = useState('');
     const [token] = useToken(loginEmail);
     const [formLoading, setFormLoading] = useState(false);
+    const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
         if (token) {
-            toast.success('Logged in successfully.');
+            setRedirect(false);
             navigate(from, { replace: true });
         }
     }, [token, from, navigate])
@@ -35,8 +36,8 @@ const Login = () => {
         signInWithEmail(email, password)
             .then(userCredential => {
                 const user = userCredential.user;
-
-                fetch(`http://localhost:5000/user?email=${user.email}`)
+                setRedirect(true);
+                fetch(`https://cadence-watches-server.vercel.app/user?email=${user.email}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data.role) {
@@ -44,7 +45,7 @@ const Login = () => {
                             const currentUser = { ...user, role };
                             setUserInfo(currentUser);
                             setLoginEmail(user.email);
-                            setFormLoading(false);
+                            toast.success('Logged in successfully.');
                         }
                     })
                     .catch(error => toast.error(error.message))
@@ -62,6 +63,9 @@ const Login = () => {
             <div className='max-w-md p-6 border border-neutral-content rounded-lg flex-1 relative'>
                 {
                     formLoading && <FormLoader>Logging in...</FormLoader>
+                }
+                {
+                    redirect && <FormLoader>Redirecting...</FormLoader>
                 }
                 <>
                     <form onSubmit={handleSubmit(handleForm)} className='flex flex-col gap-4'>
@@ -82,7 +86,7 @@ const Login = () => {
                         <p className='text-sm text-center'>Don't Have an Account? <Link to='/register' className='font-bold text-base hover:underline'>Register</Link></p>
                     </form>
                     <div className="divider">OR</div>
-                    <GoogleSignIn from={from} setFormLoading={setFormLoading} formLoading={formLoading}></GoogleSignIn>
+                    <GoogleSignIn from={from} setFormLoading={setFormLoading} formLoading={formLoading} setRedirect={setRedirect}></GoogleSignIn>
                 </>
             </div>
         </div>

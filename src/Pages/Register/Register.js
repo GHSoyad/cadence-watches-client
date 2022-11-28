@@ -19,7 +19,8 @@ const Register = () => {
 
     useEffect(() => {
         if (token) {
-            navigate('/')
+            setRedirect(false);
+            navigate('/');
         }
     }, [token, navigate])
 
@@ -59,7 +60,7 @@ const Register = () => {
             role
         }
 
-        fetch('http://localhost:5000/users', {
+        fetch('https://cadence-watches-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -74,7 +75,6 @@ const Register = () => {
                 }
             })
             .catch(error => toast.error(error.message))
-            .finally(() => setRedirect(false))
     }
 
     return (
@@ -134,7 +134,7 @@ const Register = () => {
                     <p className='text-sm text-center'>Already Have an Account? <Link to='/login' className='font-bold text-base hover:underline'>Login</Link></p>
                 </form>
                 <div className="divider">OR</div>
-                <GoogleSignIn setFormLoading={setFormLoading} formLoading={formLoading}></GoogleSignIn>
+                <GoogleSignIn setFormLoading={setFormLoading} formLoading={formLoading} setRedirect={setRedirect}></GoogleSignIn>
             </div>
         </div>
     );

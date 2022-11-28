@@ -14,7 +14,7 @@ const AllSellers = () => {
     const { isLoading, data: sellers, refetch } = useQuery({
         queryKey: ['sellers'],
         queryFn: () =>
-            axios.get('http://localhost:5000/users?role=seller', {
+            axios.get('https://cadence-watches-server.vercel.app/users?role=seller', {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('cadenceSecretToken')}`
                 }
@@ -26,7 +26,7 @@ const AllSellers = () => {
     const handleDelete = (data) => {
         const id = data._id;
 
-        fetch(`http://localhost:5000/users/${id}`, {
+        fetch(`https://cadence-watches-server.vercel.app/users/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('cadenceSecretToken')}`
@@ -43,7 +43,7 @@ const AllSellers = () => {
 
     // Verify seller
     const handleVerify = (email) => {
-        fetch(`http://localhost:5000/users?email=${email}`, {
+        fetch(`https://cadence-watches-server.vercel.app/users?email=${email}`, {
             method: 'PATCH',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('cadenceSecretToken')}`

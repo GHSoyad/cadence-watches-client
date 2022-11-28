@@ -14,7 +14,7 @@ const Home = () => {
     const { isLoading, data: advertisedProducts, refetch } = useQuery({
         queryKey: ['advertisedProducts'],
         queryFn: () =>
-            axios.get('http://localhost:5000/products/advertised')
+            axios.get('https://cadence-watches-server.vercel.app/products/advertised')
                 .then(data => data.data)
     })
 

@@ -7,7 +7,7 @@ const useRole = (email) => {
 
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/user?email=${email}`)
+            fetch(`https://cadence-watches-server.vercel.app/user?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setRole(data.role);

@@ -13,7 +13,7 @@ const ReportedProducts = () => {
     // Get reported products data
     const { isLoading, data: reportedProducts, refetch } = useQuery({
         queryKey: ['reportedProducts'],
-        queryFn: () => axios.get('http://localhost:5000/report/products', {
+        queryFn: () => axios.get('https://cadence-watches-server.vercel.app/report/products', {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('cadenceSecretToken')}`
             }
@@ -25,7 +25,7 @@ const ReportedProducts = () => {
     const handleDelete = (product) => {
         const productId = product.productId;
 
-        fetch(`http://localhost:5000/report/products/${productId}`, {
+        fetch(`https://cadence-watches-server.vercel.app/report/products/${productId}`, {
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('cadenceSecretToken')}`

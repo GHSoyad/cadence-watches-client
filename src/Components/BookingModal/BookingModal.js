@@ -32,7 +32,7 @@ const BookingModal = ({ bookProduct, refetch, setBookProduct }) => {
             status: 'unpaid'
         }
 
-        fetch('http://localhost:5000/orders', {
+        fetch('https://cadence-watches-server.vercel.app/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

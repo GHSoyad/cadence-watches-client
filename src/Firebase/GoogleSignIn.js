@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider/AuthProvider';
 import useToken from '../Hooks/useToken';
 
-const GoogleSignIn = ({ from, formLoading, setFormLoading }) => {
+const GoogleSignIn = ({ from, formLoading, setFormLoading, setRedirect }) => {
 
     const { signInWithGoogle, setUserInfo, setUserLoading } = useContext(AuthContext);
     const [loginEmail, setLoginEmail] = useState('');
@@ -13,16 +13,18 @@ const GoogleSignIn = ({ from, formLoading, setFormLoading }) => {
 
     useEffect(() => {
         if (token) {
+            setRedirect(false);
             toast.success('Logged in successfully.');
             navigate(from || '/', { replace: true });
         }
-    }, [token, navigate, from])
+    }, [token, navigate, from, setRedirect])
 
     // Sign in with google
     const handleGoogleSignIn = () => {
         setFormLoading(true);
         signInWithGoogle()
             .then(result => {
+                setRedirect(true);
                 const user = result.user;
                 const role = 'buyer';
                 const currentUser = { ...user, role };
@@ -44,7 +46,7 @@ const GoogleSignIn = ({ from, formLoading, setFormLoading }) => {
             role: 'buyer'
         }
 
-        fetch('http://localhost:5000/users', {
+        fetch('https://cadence-watches-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

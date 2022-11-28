@@ -62,7 +62,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/checkout/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/orders/${params.id}`),
+                loader: ({ params }) => fetch(`https://cadence-watches-server.vercel.app/orders/${params.id}`),
                 element: <Checkout></Checkout>
             },
             {

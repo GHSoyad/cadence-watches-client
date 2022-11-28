@@ -10,7 +10,7 @@ const CategorySection = () => {
     const { isLoading, data: categories } = useQuery({
         queryKey: ['categories'],
         queryFn: () =>
-            axios.get('http://localhost:5000/categories')
+            axios.get('https://cadence-watches-server.vercel.app/categories')
                 .then(data => data.data)
     })
 
