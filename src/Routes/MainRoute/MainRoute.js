@@ -43,7 +43,7 @@ const router = createBrowserRouter([
                 loader: ({ params }) => {
                     return params.id;
                 },
-                element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>
+                element: <CategoryProducts></CategoryProducts>
             },
             {
                 path: '/blogs',

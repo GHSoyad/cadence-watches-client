@@ -80,7 +80,7 @@ const ReportedProducts = () => {
                                 productInfo &&
                                 <ConfirmModal modalData={productInfo} closeModal={setProductInfo} confirm={handleDelete}>
                                     <h3 className="font-bold text-lg">Delete Seller?</h3>
-                                    <p className="py-4"><span className='font-bold text-red-500'>"{productInfo.name}"</span> will be deleted permanently!</p>
+                                    <p className="py-4"><span className='font-bold text-red-500'>{productInfo.product}</span> will be deleted permanently!</p>
                                 </ConfirmModal>
                             }
                         </div>

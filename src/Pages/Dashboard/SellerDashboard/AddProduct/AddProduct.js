@@ -26,7 +26,7 @@ const AddProduct = () => {
     // Post product
     const handleForm = (data) => {
         setFormLoading(true);
-        const sellerName = userInfo.name;
+        const sellerName = userInfo.displayName;
         const sellerEmail = userInfo.email;
         const sellerStatus = userInfo.status;
         const date = format(new Date(), 'PPPpp');
