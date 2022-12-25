@@ -5,6 +5,10 @@
 ## Description
 The Project is developed using ReactJS, NodeJS, ExpressJS, MongoDB and FireBase, The app is responsive on smaller devices.
 
+#### Admin Login Details
+Email: admin@cadence.com
+Password: Admin@cadence123
+
 ### CSS Framework
 TailWind CSS Framework and DaisyUI components
 

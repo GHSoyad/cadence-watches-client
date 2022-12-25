@@ -1,0 +1,31 @@
+.swiper {
+    padding: 0 20px 30px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    --tw-bg-opacity: 1;
+    color: hsl(var(--nc) / var(--tw-bg-opacity));
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: xx-large;
+    font-weight: 700;
+}
+
+.swiper-pagination-bullet-active {
+    --tw-bg-opacity: 1;
+    background-color: hsl(var(--nc) / var(--tw-bg-opacity))
+}
+
+.swiper-pagination-bullet {
+    --tw-bg-opacity: 1;
+    background-color: hsl(var(--nc) / var(--tw-bg-opacity))
+}
+
+@media screen and (min-width: 640px) {
+    .swiper {
+        padding: 0 30px 40px;
+    }
+}
