@@ -6,6 +6,7 @@ import AdvertisedProducts from '../AdvertisedProducts/AdvertisedProducts';
 import CategorySection from '../CategorySection/CategorySection';
 import FeatureSection from '../FeatureSection/FeatureSection';
 import HeroBanner from '../HeroBanner/HeroBanner';
+import NewsLetter from '../NewsLetter/NewsLetter';
 import TestimonialSection from '../TestimonialSection/TestimonialSection';
 
 const Home = () => {
@@ -29,6 +30,7 @@ const Home = () => {
             }
             <FeatureSection></FeatureSection>
             <TestimonialSection></TestimonialSection>
+            <NewsLetter></NewsLetter>
         </div>
     );
 };

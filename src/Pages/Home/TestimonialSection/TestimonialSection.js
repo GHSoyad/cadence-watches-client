@@ -18,12 +18,12 @@ const TestimonialSection = () => {
     ]
 
     return (
-        <section className='container mx-auto max-w-screen-xl px-2 md:px-4 xl:px-0 '>
+        <section id='reviews' className='container mx-auto max-w-screen-xl px-2 md:px-4 xl:px-0 '>
             <div>
                 <h2 className="text-2xl font-bold">Customers Reviews</h2>
                 <div className='divider bg-neutral-content h-0.5 opacity-50 mt-2 mb-6'></div>
 
-                <div className="mt-12">
+                <div className="mt-12 select-none">
                     <Swiper modules={[Navigation, Pagination, A11y, Autoplay, EffectCoverflow]}
                         spaceBetween={40}
                         slidesPerView={3}

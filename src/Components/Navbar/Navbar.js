@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import logo from '../../Assets/images/logo.png';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 
@@ -21,6 +22,8 @@ const Navbar = () => {
 
     const menuLinks = <>
         <li><NavLink to='/'>Home</NavLink></li>
+        <li><HashLink to='/#category'>Category</HashLink></li>
+        <li><HashLink to='/#reviews'>Reviews</HashLink></li>
         <li><NavLink to='/blogs'>Blogs</NavLink></li>
         {
             userInfo && userInfo.uid ?
